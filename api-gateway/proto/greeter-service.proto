@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+option go_package = "proto/greeter";
+
+import "google/api/annotations.proto";
+
+service GreeterService {
+  rpc Greet(Request) returns (Response) {
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  }
+
+  rpc GreetTest(Request) returns (Response) {
+    option (google.api.http) = {
+      get: "/"
+    };
+  }
+}
+
+message Request {
+  string name = 1;
+}
+
+message Response {
+  string greeting = 2;
+}
+
+
+
+service UserService {
+  rpc WriteUserRpc (WriteUserRequest) returns (Empty) {}
+  rpc FindByIdRpc (FindByIdRequest) returns (FindByIdResponse) {}
+  rpc CreateFollowConnectionRpc (CreateFollowConnectionRequest) returns (Empty) {}
+  rpc GetFollowsRpc (GetFollowsRequest) returns (FollowsResponse) {}
+  rpc GetFollowersRpc (GetFollowersRequest) returns (FollowersResponse) {}
+  rpc GetSuggestionsForUserRpc (GetSuggestionsRequest) returns (SuggestionsResponse) {}
+  rpc CheckIfFollowingConnectionExistRpc (CheckIfFollowingConnectionExistRequest) returns (CheckResponse) {}
+  rpc DeleteFollowConnectionRpc (DeleteFollowConnectionRequest) returns (Empty) {}
+}
+
+// Poruke zahteva i odgovora
+message UserDto {
+  int64 id = 1;
+}
+
+message WriteUserRequest{
+  UserDto userDto = 1;
+}
+
+message FindByIdResponse{
+  UserDto userDto = 1;
+}
+
+
+message Empty {}
+message FindByIdRequest {
+  int64 id = 1;
+}
+message CreateFollowConnectionRequest {
+  int64 first_id = 1;
+  int64 second_id = 2;
+}
+message GetFollowsRequest {
+  int64 id = 1;
+}
+message GetFollowersRequest {
+  int64 id = 1;
+}
+message GetSuggestionsRequest {
+  int64 id = 1;
+}
+message CheckIfFollowingConnectionExistRequest {
+  int64 id1 = 1;
+  int64 id2 = 2;
+}
+message FollowsResponse {
+  repeated int64 follows = 1;
+}
+message FollowersResponse {
+  repeated int64 followers = 1;
+}
+message SuggestionsResponse {
+  repeated int64 suggestions = 1;
+}
+message CheckResponse {
+  bool exists = 1;
+}
+
+message DeleteFollowConnectionRequest {
+    int64 id1 = 1;
+    int64 id2 = 2;
+  }
