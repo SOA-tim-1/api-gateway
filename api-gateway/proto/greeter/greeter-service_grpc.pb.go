@@ -146,20 +146,20 @@ var GreeterService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserService_WriteUserRpc_FullMethodName                       = "/UserService/WriteUserRpc"
-	UserService_FindByIdRpc_FullMethodName                        = "/UserService/FindByIdRpc"
-	UserService_CreateFollowConnectionRpc_FullMethodName          = "/UserService/CreateFollowConnectionRpc"
-	UserService_GetFollowsRpc_FullMethodName                      = "/UserService/GetFollowsRpc"
-	UserService_GetFollowersRpc_FullMethodName                    = "/UserService/GetFollowersRpc"
-	UserService_GetSuggestionsForUserRpc_FullMethodName           = "/UserService/GetSuggestionsForUserRpc"
-	UserService_CheckIfFollowingConnectionExistRpc_FullMethodName = "/UserService/CheckIfFollowingConnectionExistRpc"
-	UserService_DeleteFollowConnectionRpc_FullMethodName          = "/UserService/DeleteFollowConnectionRpc"
+	FollowerService_WriteUserRpc_FullMethodName                       = "/FollowerService/WriteUserRpc"
+	FollowerService_FindByIdRpc_FullMethodName                        = "/FollowerService/FindByIdRpc"
+	FollowerService_CreateFollowConnectionRpc_FullMethodName          = "/FollowerService/CreateFollowConnectionRpc"
+	FollowerService_GetFollowsRpc_FullMethodName                      = "/FollowerService/GetFollowsRpc"
+	FollowerService_GetFollowersRpc_FullMethodName                    = "/FollowerService/GetFollowersRpc"
+	FollowerService_GetSuggestionsForUserRpc_FullMethodName           = "/FollowerService/GetSuggestionsForUserRpc"
+	FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName = "/FollowerService/CheckIfFollowingConnectionExistRpc"
+	FollowerService_DeleteFollowConnectionRpc_FullMethodName          = "/FollowerService/DeleteFollowConnectionRpc"
 )
 
-// UserServiceClient is the client API for UserService service.
+// FollowerServiceClient is the client API for FollowerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserServiceClient interface {
+type FollowerServiceClient interface {
 	WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error)
 	FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 	CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -170,6 +170,468 @@ type UserServiceClient interface {
 	DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
+type followerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFollowerServiceClient(cc grpc.ClientConnInterface) FollowerServiceClient {
+	return &followerServiceClient{cc}
+}
+
+func (c *followerServiceClient) WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, FollowerService_WriteUserRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
+	out := new(FindByIdResponse)
+	err := c.cc.Invoke(ctx, FollowerService_FindByIdRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, FollowerService_CreateFollowConnectionRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) GetFollowsRpc(ctx context.Context, in *GetFollowsRequest, opts ...grpc.CallOption) (*FollowsResponse, error) {
+	out := new(FollowsResponse)
+	err := c.cc.Invoke(ctx, FollowerService_GetFollowsRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) GetFollowersRpc(ctx context.Context, in *GetFollowersRequest, opts ...grpc.CallOption) (*FollowersResponse, error) {
+	out := new(FollowersResponse)
+	err := c.cc.Invoke(ctx, FollowerService_GetFollowersRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) GetSuggestionsForUserRpc(ctx context.Context, in *GetSuggestionsRequest, opts ...grpc.CallOption) (*SuggestionsResponse, error) {
+	out := new(SuggestionsResponse)
+	err := c.cc.Invoke(ctx, FollowerService_GetSuggestionsForUserRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) CheckIfFollowingConnectionExistRpc(ctx context.Context, in *CheckIfFollowingConnectionExistRequest, opts ...grpc.CallOption) (*CheckResponse, error) {
+	out := new(CheckResponse)
+	err := c.cc.Invoke(ctx, FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *followerServiceClient) DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, FollowerService_DeleteFollowConnectionRpc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FollowerServiceServer is the server API for FollowerService service.
+// All implementations must embed UnimplementedFollowerServiceServer
+// for forward compatibility
+type FollowerServiceServer interface {
+	WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error)
+	FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
+	CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error)
+	GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error)
+	GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error)
+	GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error)
+	CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error)
+	DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error)
+	mustEmbedUnimplementedFollowerServiceServer()
+}
+
+// UnimplementedFollowerServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFollowerServiceServer struct {
+}
+
+func (UnimplementedFollowerServiceServer) WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WriteUserRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindByIdRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateFollowConnectionRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFollowsRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFollowersRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSuggestionsForUserRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckIfFollowingConnectionExistRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFollowConnectionRpc not implemented")
+}
+func (UnimplementedFollowerServiceServer) mustEmbedUnimplementedFollowerServiceServer() {}
+
+// UnsafeFollowerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FollowerServiceServer will
+// result in compilation errors.
+type UnsafeFollowerServiceServer interface {
+	mustEmbedUnimplementedFollowerServiceServer()
+}
+
+func RegisterFollowerServiceServer(s grpc.ServiceRegistrar, srv FollowerServiceServer) {
+	s.RegisterService(&FollowerService_ServiceDesc, srv)
+}
+
+func _FollowerService_WriteUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).WriteUserRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_WriteUserRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).WriteUserRpc(ctx, req.(*WriteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_FindByIdRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).FindByIdRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_FindByIdRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).FindByIdRpc(ctx, req.(*FindByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_CreateFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFollowConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).CreateFollowConnectionRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_CreateFollowConnectionRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).CreateFollowConnectionRpc(ctx, req.(*CreateFollowConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_GetFollowsRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFollowsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).GetFollowsRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_GetFollowsRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).GetFollowsRpc(ctx, req.(*GetFollowsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_GetFollowersRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFollowersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).GetFollowersRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_GetFollowersRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).GetFollowersRpc(ctx, req.(*GetFollowersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_GetSuggestionsForUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSuggestionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).GetSuggestionsForUserRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_GetSuggestionsForUserRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).GetSuggestionsForUserRpc(ctx, req.(*GetSuggestionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_CheckIfFollowingConnectionExistRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckIfFollowingConnectionExistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).CheckIfFollowingConnectionExistRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).CheckIfFollowingConnectionExistRpc(ctx, req.(*CheckIfFollowingConnectionExistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FollowerService_DeleteFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFollowConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FollowerServiceServer).DeleteFollowConnectionRpc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FollowerService_DeleteFollowConnectionRpc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FollowerServiceServer).DeleteFollowConnectionRpc(ctx, req.(*DeleteFollowConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FollowerService_ServiceDesc is the grpc.ServiceDesc for FollowerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FollowerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "FollowerService",
+	HandlerType: (*FollowerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "WriteUserRpc",
+			Handler:    _FollowerService_WriteUserRpc_Handler,
+		},
+		{
+			MethodName: "FindByIdRpc",
+			Handler:    _FollowerService_FindByIdRpc_Handler,
+		},
+		{
+			MethodName: "CreateFollowConnectionRpc",
+			Handler:    _FollowerService_CreateFollowConnectionRpc_Handler,
+		},
+		{
+			MethodName: "GetFollowsRpc",
+			Handler:    _FollowerService_GetFollowsRpc_Handler,
+		},
+		{
+			MethodName: "GetFollowersRpc",
+			Handler:    _FollowerService_GetFollowersRpc_Handler,
+		},
+		{
+			MethodName: "GetSuggestionsForUserRpc",
+			Handler:    _FollowerService_GetSuggestionsForUserRpc_Handler,
+		},
+		{
+			MethodName: "CheckIfFollowingConnectionExistRpc",
+			Handler:    _FollowerService_CheckIfFollowingConnectionExistRpc_Handler,
+		},
+		{
+			MethodName: "DeleteFollowConnectionRpc",
+			Handler:    _FollowerService_DeleteFollowConnectionRpc_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	Authorize_Authorize_FullMethodName = "/Authorize/Authorize"
+	Authorize_Register_FullMethodName  = "/Authorize/Register"
+)
+
+// AuthorizeClient is the client API for Authorize service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AuthorizeClient interface {
+	Authorize(ctx context.Context, in *Credentials, opts ...grpc.CallOption) (*AuthenticationTokens, error)
+	Register(ctx context.Context, in *AccountRegistration, opts ...grpc.CallOption) (*AuthenticationTokens, error)
+}
+
+type authorizeClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAuthorizeClient(cc grpc.ClientConnInterface) AuthorizeClient {
+	return &authorizeClient{cc}
+}
+
+func (c *authorizeClient) Authorize(ctx context.Context, in *Credentials, opts ...grpc.CallOption) (*AuthenticationTokens, error) {
+	out := new(AuthenticationTokens)
+	err := c.cc.Invoke(ctx, Authorize_Authorize_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizeClient) Register(ctx context.Context, in *AccountRegistration, opts ...grpc.CallOption) (*AuthenticationTokens, error) {
+	out := new(AuthenticationTokens)
+	err := c.cc.Invoke(ctx, Authorize_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AuthorizeServer is the server API for Authorize service.
+// All implementations must embed UnimplementedAuthorizeServer
+// for forward compatibility
+type AuthorizeServer interface {
+	Authorize(context.Context, *Credentials) (*AuthenticationTokens, error)
+	Register(context.Context, *AccountRegistration) (*AuthenticationTokens, error)
+	mustEmbedUnimplementedAuthorizeServer()
+}
+
+// UnimplementedAuthorizeServer must be embedded to have forward compatible implementations.
+type UnimplementedAuthorizeServer struct {
+}
+
+func (UnimplementedAuthorizeServer) Authorize(context.Context, *Credentials) (*AuthenticationTokens, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
+}
+func (UnimplementedAuthorizeServer) Register(context.Context, *AccountRegistration) (*AuthenticationTokens, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedAuthorizeServer) mustEmbedUnimplementedAuthorizeServer() {}
+
+// UnsafeAuthorizeServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AuthorizeServer will
+// result in compilation errors.
+type UnsafeAuthorizeServer interface {
+	mustEmbedUnimplementedAuthorizeServer()
+}
+
+func RegisterAuthorizeServer(s grpc.ServiceRegistrar, srv AuthorizeServer) {
+	s.RegisterService(&Authorize_ServiceDesc, srv)
+}
+
+func _Authorize_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Credentials)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizeServer).Authorize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Authorize_Authorize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizeServer).Authorize(ctx, req.(*Credentials))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Authorize_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccountRegistration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizeServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Authorize_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizeServer).Register(ctx, req.(*AccountRegistration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Authorize_ServiceDesc is the grpc.ServiceDesc for Authorize service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Authorize_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "Authorize",
+	HandlerType: (*AuthorizeServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Authorize",
+			Handler:    _Authorize_Authorize_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _Authorize_Register_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	UserService_GetById_FullMethodName = "/UserService/GetById"
+)
+
+// UserServiceClient is the client API for UserService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UserServiceClient interface {
+	GetById(ctx context.Context, in *UserIdRequest, opts ...grpc.CallOption) (*UserDto, error)
+}
+
 type userServiceClient struct {
 	cc grpc.ClientConnInterface
 }
@@ -178,72 +640,9 @@ func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
 }
 
-func (c *userServiceClient) WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_WriteUserRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
-	out := new(FindByIdResponse)
-	err := c.cc.Invoke(ctx, UserService_FindByIdRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_CreateFollowConnectionRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) GetFollowsRpc(ctx context.Context, in *GetFollowsRequest, opts ...grpc.CallOption) (*FollowsResponse, error) {
-	out := new(FollowsResponse)
-	err := c.cc.Invoke(ctx, UserService_GetFollowsRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) GetFollowersRpc(ctx context.Context, in *GetFollowersRequest, opts ...grpc.CallOption) (*FollowersResponse, error) {
-	out := new(FollowersResponse)
-	err := c.cc.Invoke(ctx, UserService_GetFollowersRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) GetSuggestionsForUserRpc(ctx context.Context, in *GetSuggestionsRequest, opts ...grpc.CallOption) (*SuggestionsResponse, error) {
-	out := new(SuggestionsResponse)
-	err := c.cc.Invoke(ctx, UserService_GetSuggestionsForUserRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) CheckIfFollowingConnectionExistRpc(ctx context.Context, in *CheckIfFollowingConnectionExistRequest, opts ...grpc.CallOption) (*CheckResponse, error) {
-	out := new(CheckResponse)
-	err := c.cc.Invoke(ctx, UserService_CheckIfFollowingConnectionExistRpc_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_DeleteFollowConnectionRpc_FullMethodName, in, out, opts...)
+func (c *userServiceClient) GetById(ctx context.Context, in *UserIdRequest, opts ...grpc.CallOption) (*UserDto, error) {
+	out := new(UserDto)
+	err := c.cc.Invoke(ctx, UserService_GetById_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -254,14 +653,7 @@ func (c *userServiceClient) DeleteFollowConnectionRpc(ctx context.Context, in *D
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
-	WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error)
-	FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
-	CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error)
-	GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error)
-	GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error)
-	GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error)
-	CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error)
-	DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error)
+	GetById(context.Context, *UserIdRequest) (*UserDto, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -269,29 +661,8 @@ type UserServiceServer interface {
 type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method WriteUserRpc not implemented")
-}
-func (UnimplementedUserServiceServer) FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindByIdRpc not implemented")
-}
-func (UnimplementedUserServiceServer) CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateFollowConnectionRpc not implemented")
-}
-func (UnimplementedUserServiceServer) GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFollowsRpc not implemented")
-}
-func (UnimplementedUserServiceServer) GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFollowersRpc not implemented")
-}
-func (UnimplementedUserServiceServer) GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSuggestionsForUserRpc not implemented")
-}
-func (UnimplementedUserServiceServer) CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckIfFollowingConnectionExistRpc not implemented")
-}
-func (UnimplementedUserServiceServer) DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteFollowConnectionRpc not implemented")
+func (UnimplementedUserServiceServer) GetById(context.Context, *UserIdRequest) (*UserDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -306,146 +677,20 @@ func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
-func _UserService_WriteUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WriteUserRequest)
+func _UserService_GetById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).WriteUserRpc(ctx, in)
+		return srv.(UserServiceServer).GetById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_WriteUserRpc_FullMethodName,
+		FullMethod: UserService_GetById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).WriteUserRpc(ctx, req.(*WriteUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_FindByIdRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).FindByIdRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_FindByIdRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).FindByIdRpc(ctx, req.(*FindByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_CreateFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateFollowConnectionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).CreateFollowConnectionRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_CreateFollowConnectionRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CreateFollowConnectionRpc(ctx, req.(*CreateFollowConnectionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_GetFollowsRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFollowsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).GetFollowsRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_GetFollowsRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetFollowsRpc(ctx, req.(*GetFollowsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_GetFollowersRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFollowersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).GetFollowersRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_GetFollowersRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetFollowersRpc(ctx, req.(*GetFollowersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_GetSuggestionsForUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSuggestionsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).GetSuggestionsForUserRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_GetSuggestionsForUserRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetSuggestionsForUserRpc(ctx, req.(*GetSuggestionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_CheckIfFollowingConnectionExistRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckIfFollowingConnectionExistRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).CheckIfFollowingConnectionExistRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_CheckIfFollowingConnectionExistRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CheckIfFollowingConnectionExistRpc(ctx, req.(*CheckIfFollowingConnectionExistRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_DeleteFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteFollowConnectionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).DeleteFollowConnectionRpc(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_DeleteFollowConnectionRpc_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).DeleteFollowConnectionRpc(ctx, req.(*DeleteFollowConnectionRequest))
+		return srv.(UserServiceServer).GetById(ctx, req.(*UserIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -458,36 +703,98 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "WriteUserRpc",
-			Handler:    _UserService_WriteUserRpc_Handler,
+			MethodName: "GetById",
+			Handler:    _UserService_GetById_Handler,
 		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	PersonService_GetByUserId_FullMethodName = "/PersonService/GetByUserId"
+)
+
+// PersonServiceClient is the client API for PersonService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PersonServiceClient interface {
+	GetByUserId(ctx context.Context, in *PersonIdRequest, opts ...grpc.CallOption) (*PersonDto, error)
+}
+
+type personServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPersonServiceClient(cc grpc.ClientConnInterface) PersonServiceClient {
+	return &personServiceClient{cc}
+}
+
+func (c *personServiceClient) GetByUserId(ctx context.Context, in *PersonIdRequest, opts ...grpc.CallOption) (*PersonDto, error) {
+	out := new(PersonDto)
+	err := c.cc.Invoke(ctx, PersonService_GetByUserId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PersonServiceServer is the server API for PersonService service.
+// All implementations must embed UnimplementedPersonServiceServer
+// for forward compatibility
+type PersonServiceServer interface {
+	GetByUserId(context.Context, *PersonIdRequest) (*PersonDto, error)
+	mustEmbedUnimplementedPersonServiceServer()
+}
+
+// UnimplementedPersonServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPersonServiceServer struct {
+}
+
+func (UnimplementedPersonServiceServer) GetByUserId(context.Context, *PersonIdRequest) (*PersonDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByUserId not implemented")
+}
+func (UnimplementedPersonServiceServer) mustEmbedUnimplementedPersonServiceServer() {}
+
+// UnsafePersonServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PersonServiceServer will
+// result in compilation errors.
+type UnsafePersonServiceServer interface {
+	mustEmbedUnimplementedPersonServiceServer()
+}
+
+func RegisterPersonServiceServer(s grpc.ServiceRegistrar, srv PersonServiceServer) {
+	s.RegisterService(&PersonService_ServiceDesc, srv)
+}
+
+func _PersonService_GetByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PersonIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PersonServiceServer).GetByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PersonService_GetByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PersonServiceServer).GetByUserId(ctx, req.(*PersonIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PersonService_ServiceDesc is the grpc.ServiceDesc for PersonService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PersonService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "PersonService",
+	HandlerType: (*PersonServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "FindByIdRpc",
-			Handler:    _UserService_FindByIdRpc_Handler,
-		},
-		{
-			MethodName: "CreateFollowConnectionRpc",
-			Handler:    _UserService_CreateFollowConnectionRpc_Handler,
-		},
-		{
-			MethodName: "GetFollowsRpc",
-			Handler:    _UserService_GetFollowsRpc_Handler,
-		},
-		{
-			MethodName: "GetFollowersRpc",
-			Handler:    _UserService_GetFollowersRpc_Handler,
-		},
-		{
-			MethodName: "GetSuggestionsForUserRpc",
-			Handler:    _UserService_GetSuggestionsForUserRpc_Handler,
-		},
-		{
-			MethodName: "CheckIfFollowingConnectionExistRpc",
-			Handler:    _UserService_CheckIfFollowingConnectionExistRpc_Handler,
-		},
-		{
-			MethodName: "DeleteFollowConnectionRpc",
-			Handler:    _UserService_DeleteFollowConnectionRpc_Handler,
+			MethodName: "GetByUserId",
+			Handler:    _PersonService_GetByUserId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
