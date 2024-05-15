@@ -343,19 +343,35 @@ func local_request_UserService_GetSuggestionsForUserRpc_0(ctx context.Context, m
 
 }
 
-var (
-	filter_UserService_CheckIfFollowingConnectionExistRpc_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_UserService_CheckIfFollowingConnectionExistRpc_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CheckIfFollowingConnectionExistRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["following_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "following_id")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_UserService_CheckIfFollowingConnectionExistRpc_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.FollowingId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "following_id", err)
+	}
+
+	val, ok = pathParams["followed_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "followed_id")
+	}
+
+	protoReq.FollowedId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "followed_id", err)
 	}
 
 	msg, err := client.CheckIfFollowingConnectionExistRpc(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -367,11 +383,31 @@ func local_request_UserService_CheckIfFollowingConnectionExistRpc_0(ctx context.
 	var protoReq CheckIfFollowingConnectionExistRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["following_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "following_id")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_UserService_CheckIfFollowingConnectionExistRpc_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.FollowingId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "following_id", err)
+	}
+
+	val, ok = pathParams["followed_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "followed_id")
+	}
+
+	protoReq.FollowedId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "followed_id", err)
 	}
 
 	msg, err := server.CheckIfFollowingConnectionExistRpc(ctx, &protoReq)
@@ -379,19 +415,35 @@ func local_request_UserService_CheckIfFollowingConnectionExistRpc_0(ctx context.
 
 }
 
-var (
-	filter_UserService_DeleteFollowConnectionRpc_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_UserService_DeleteFollowConnectionRpc_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteFollowConnectionRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["following_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "following_id")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_UserService_DeleteFollowConnectionRpc_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.FollowingId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "following_id", err)
+	}
+
+	val, ok = pathParams["followed_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "followed_id")
+	}
+
+	protoReq.FollowedId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "followed_id", err)
 	}
 
 	msg, err := client.DeleteFollowConnectionRpc(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -403,11 +455,31 @@ func local_request_UserService_DeleteFollowConnectionRpc_0(ctx context.Context, 
 	var protoReq DeleteFollowConnectionRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["following_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "following_id")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_UserService_DeleteFollowConnectionRpc_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+
+	protoReq.FollowingId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "following_id", err)
+	}
+
+	val, ok = pathParams["followed_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "followed_id")
+	}
+
+	protoReq.FollowedId, err = runtime.Int64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "followed_id", err)
 	}
 
 	msg, err := server.DeleteFollowConnectionRpc(ctx, &protoReq)
@@ -613,7 +685,7 @@ func RegisterUserServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.UserService/CheckIfFollowingConnectionExistRpc", runtime.WithHTTPPathPattern("/api/follower/check-following"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.UserService/CheckIfFollowingConnectionExistRpc", runtime.WithHTTPPathPattern("/api/follower/check-following/{following_id}/{followed_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -638,7 +710,7 @@ func RegisterUserServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.UserService/DeleteFollowConnectionRpc", runtime.WithHTTPPathPattern("/api/follower/delete-follow-connection"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/.UserService/DeleteFollowConnectionRpc", runtime.WithHTTPPathPattern("/api/follower/delete-follow-connection/{following_id}/{followed_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -909,7 +981,7 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.UserService/CheckIfFollowingConnectionExistRpc", runtime.WithHTTPPathPattern("/api/follower/check-following"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.UserService/CheckIfFollowingConnectionExistRpc", runtime.WithHTTPPathPattern("/api/follower/check-following/{following_id}/{followed_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -931,7 +1003,7 @@ func RegisterUserServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.UserService/DeleteFollowConnectionRpc", runtime.WithHTTPPathPattern("/api/follower/delete-follow-connection"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/.UserService/DeleteFollowConnectionRpc", runtime.WithHTTPPathPattern("/api/follower/delete-follow-connection/{following_id}/{followed_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -961,9 +1033,9 @@ var (
 
 	pattern_UserService_GetSuggestionsForUserRpc_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "follower", "get-suggestions", "id"}, ""))
 
-	pattern_UserService_CheckIfFollowingConnectionExistRpc_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "follower", "check-following"}, ""))
+	pattern_UserService_CheckIfFollowingConnectionExistRpc_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "follower", "check-following", "following_id", "followed_id"}, ""))
 
-	pattern_UserService_DeleteFollowConnectionRpc_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "follower", "delete-follow-connection"}, ""))
+	pattern_UserService_DeleteFollowConnectionRpc_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "follower", "delete-follow-connection", "following_id", "followed_id"}, ""))
 )
 
 var (

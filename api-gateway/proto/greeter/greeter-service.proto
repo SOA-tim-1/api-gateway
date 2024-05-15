@@ -59,12 +59,12 @@ service UserService {
   }
   rpc CheckIfFollowingConnectionExistRpc (CheckIfFollowingConnectionExistRequest) returns (CheckResponse) {
     option (google.api.http) = {
-      get: "/api/follower/check-following"
+      get: "/api/follower/check-following/{following_id}/{followed_id}"
     };
   }
   rpc DeleteFollowConnectionRpc (DeleteFollowConnectionRequest) returns (Empty) {
     option (google.api.http) = {
-      delete: "/api/follower/delete-follow-connection"
+      delete: "/api/follower/delete-follow-connection/{following_id}/{followed_id}"
     };
   }
 }
@@ -82,15 +82,22 @@ message FindByIdResponse{
   UserDto userDto = 1;
 }
 
+message Followers{
+  int64 followingId = 1;
+  int64 followedId = 2;
+}
+
 
 message Empty {}
 message FindByIdRequest {
   int64 id = 1;
 }
+
 message CreateFollowConnectionRequest {
-  int64 first_id = 1;
-  int64 second_id = 2;
+  int64 followingId = 1;
+  int64 followedId = 2;
 }
+
 message GetFollowsRequest {
   int64 id = 1;
 }
@@ -101,8 +108,8 @@ message GetSuggestionsRequest {
   int64 id = 1;
 }
 message CheckIfFollowingConnectionExistRequest {
-  int64 id1 = 1;
-  int64 id2 = 2;
+  int64 following_id = 1;
+  int64 followed_id = 2;
 }
 message FollowsResponse {
   repeated int64 follows = 1;
@@ -118,6 +125,6 @@ message CheckResponse {
 }
 
 message DeleteFollowConnectionRequest {
-    int64 id1 = 1;
-    int64 id2 = 2;
+    int64 following_id = 1;
+    int64 followed_id = 2;
   }
