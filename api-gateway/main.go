@@ -15,6 +15,22 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+// func authMiddleware(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		// Ekstrakcija Authorization zaglavlja
+// 		authHeader := r.Header.Get("Authorization")
+// 		log.Println("Authorization Header:", authHeader)
+// 		if authHeader == "" {
+// 			http.Error(w, "Authorization header missing", http.StatusUnauthorized)
+// 			return
+// 		}
+
+// 		// Postavljanje vrednosti zaglavlja u kontekst
+// 		ctx := context.WithValue(r.Context(), "Authorization", authHeader)
+// 		next.ServeHTTP(w, r.WithContext(ctx))
+// 	})
+// }
+
 func main() {
 	cfg := config.GetConfig()
 
@@ -61,6 +77,8 @@ func main() {
 	if err != nil {
 		log.Fatalln("Failed to register AnotherService gateway:", err)
 	}
+
+	//handler := authMiddleware(gwmux)
 
 	gwServer := &http.Server{
 		Addr:    cfg.Address,
