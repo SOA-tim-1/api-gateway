@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "proto/greeter";
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 service GreeterService {
   rpc Greet(Request) returns (Response) {
@@ -128,3 +129,121 @@ message DeleteFollowConnectionRequest {
     int64 following_id = 1;
     int64 followed_id = 2;
   }
+
+  enum Status {
+    DRAFT = 0;
+    PUBLISHED = 1;
+    ARCHIVED = 2;
+  }
+  
+  enum Difficult {
+      EASY = 0;
+      MEDIUM = 1;
+      HARD = 2;
+    }
+  
+  enum TravelMethod {
+    CAR = 0;
+    BICYCLE = 1;
+    WALKING = 2;
+  }
+  
+  message TourDto {
+    int64 id = 1;
+    int64 author_id = 2;
+    string name = 3;
+    string description = 4;
+    Difficult difficult = 5; 
+    Status status = 6;
+    float price = 7;
+    string tags = 8;
+    float distance = 9;
+    repeated CheckpointDto checkpoints = 10;
+    google.protobuf.Timestamp publish_time = 11;
+    google.protobuf.Timestamp archive_time = 12;
+    repeated EquipmentDto equipments = 13;
+    repeated TravelTimeAndMethodDto travel_time_and_method = 14;
+  }
+  
+  message CheckpointDto {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    string picture_url = 4;
+    double latitude = 5;
+    double longitude = 6;
+    int64 tour_id = 7;
+  }
+  
+  message EquipmentDto {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+  }
+  
+  message TravelTimeAndMethodDto {
+    int64 travel_time = 1;
+    TravelMethod travel_method = 2;
+  }
+  
+  service TourService {
+    rpc FindTour(FindTourRequest) returns (TourDto) {
+      option (google.api.http) = {
+        get: "/tour/{id}"
+      };
+    }
+    rpc FindTourByAuthorId(FindByAuthorIdRequest) returns (FindByAuthorIdResponse) {
+      option (google.api.http) = {
+        get: "/tour/authortours/{author_id}"
+      };
+    }
+    rpc CreateTour(TourDto) returns (TourDto) {
+      option (google.api.http) = {
+        post: "/tour"
+        body: "*"
+      };
+    }
+    rpc UpdateTour(TourDto) returns (TourDto) {
+      option (google.api.http) = {
+        put: "/tour/updatetour"
+        body: "*"
+      };
+    }
+    rpc PublishTour(PublishTourRequest) returns (PublishTourResponse) {
+      option (google.api.http) = {
+        put: "/tour/publish"
+        body: "*"
+      };
+    }
+    rpc ArchiveTour(ArchiveTourRequest) returns (ArchiveTourResponse) {
+      option (google.api.http) = {
+        put: "/tour/archive"
+        body: "*"
+      };
+    }
+  }
+  
+  message FindTourRequest {
+    int64 id = 1;
+  }
+  
+  message FindByAuthorIdRequest {
+    int64 author_id = 1;
+  }
+  
+  message FindByAuthorIdResponse {
+    repeated TourDto tours = 1;
+  }
+  
+  
+  message PublishTourRequest {
+    int64 tour_id = 1;
+  }
+  
+  message PublishTourResponse {}
+  
+  message ArchiveTourRequest {
+    int64 tour_id = 1;
+  }
+  
+  message ArchiveTourResponse {}
