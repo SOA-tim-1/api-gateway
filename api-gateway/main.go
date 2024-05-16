@@ -34,17 +34,6 @@ import (
 func main() {
 	cfg := config.GetConfig()
 
-	conn, err := grpc.DialContext(
-		context.Background(),
-		cfg.GreeterServiceAddress,
-		grpc.WithBlock(),
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-	)
-
-	if err != nil {
-		log.Fatalln("Failed to dial server:", err)
-	}
-
 	conn2, err := grpc.DialContext(
 		context.Background(),
 		cfg.FollowerServiceAddress, // Adresa novog servisa
@@ -56,7 +45,7 @@ func main() {
 		log.Fatalln("Failed to dial AnotherService server:", err)
 	}
 
-	conn3, err := grpc.DialContext(
+	/*conn3, err := grpc.DialContext(
 		context.Background(),
 		cfg.StakeholderServiceAddress, // Adresa novog servisa
 		grpc.WithBlock(),
@@ -65,19 +54,9 @@ func main() {
 
 	if err != nil {
 		log.Fatalln("Failed to dial AnotherService server:", err)
-	}
+	}*/
 
 	gwmux := runtime.NewServeMux()
-	// Register Greeter
-	client := greeter.NewGreeterServiceClient(conn)
-	err = greeter.RegisterGreeterServiceHandlerClient(
-		context.Background(),
-		gwmux,
-		client,
-	)
-	if err != nil {
-		log.Fatalln("Failed to register gateway:", err)
-	}
 
 	client2 := greeter.NewFollowerServiceClient(conn2)
 	err = greeter.RegisterFollowerServiceHandlerClient(
@@ -89,7 +68,7 @@ func main() {
 		log.Fatalln("Failed to register AnotherService gateway:", err)
 	}
 
-	client3 := greeter.NewAuthorizeClient(conn3)
+	/*client3 := greeter.NewAuthorizeClient(conn3)
 	err = greeter.RegisterAuthorizeHandlerClient(
 		context.Background(),
 		gwmux,
@@ -117,7 +96,7 @@ func main() {
 	)
 	if err != nil {
 		log.Fatalln("Failed to register AnotherService gateway:", err)
-	}
+	}*/
 	//handler := authMiddleware(gwmux)
 
 	gwServer := &http.Server{
