@@ -5,6 +5,7 @@ import "os"
 type Config struct {
 	Address                string
 	FollowerServiceAddress string
+	TourServiceAddress     string
 	GreeterServiceAddress  string
 }
 
@@ -12,6 +13,7 @@ func GetConfig() Config {
 	return Config{
 		GreeterServiceAddress:  os.Getenv("GREETER_SERVICE_ADDRESS"),
 		FollowerServiceAddress: os.Getenv("FOLLOWER_SERVICE_ADDRESS"),
+		TourServiceAddress:     os.Getenv("TOUR_SERVICE_ADDRESS"),
 		Address:                os.Getenv("GATEWAY_ADDRESS"),
 	}
 }

@@ -146,20 +146,20 @@ var GreeterService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserService_WriteUserRpc_FullMethodName                       = "/UserService/WriteUserRpc"
-	UserService_FindByIdRpc_FullMethodName                        = "/UserService/FindByIdRpc"
-	UserService_CreateFollowConnectionRpc_FullMethodName          = "/UserService/CreateFollowConnectionRpc"
-	UserService_GetFollowsRpc_FullMethodName                      = "/UserService/GetFollowsRpc"
-	UserService_GetFollowersRpc_FullMethodName                    = "/UserService/GetFollowersRpc"
-	UserService_GetSuggestionsForUserRpc_FullMethodName           = "/UserService/GetSuggestionsForUserRpc"
-	UserService_CheckIfFollowingConnectionExistRpc_FullMethodName = "/UserService/CheckIfFollowingConnectionExistRpc"
-	UserService_DeleteFollowConnectionRpc_FullMethodName          = "/UserService/DeleteFollowConnectionRpc"
+	FollowerService_WriteUserRpc_FullMethodName                       = "/FollowerService/WriteUserRpc"
+	FollowerService_FindByIdRpc_FullMethodName                        = "/FollowerService/FindByIdRpc"
+	FollowerService_CreateFollowConnectionRpc_FullMethodName          = "/FollowerService/CreateFollowConnectionRpc"
+	FollowerService_GetFollowsRpc_FullMethodName                      = "/FollowerService/GetFollowsRpc"
+	FollowerService_GetFollowersRpc_FullMethodName                    = "/FollowerService/GetFollowersRpc"
+	FollowerService_GetSuggestionsForUserRpc_FullMethodName           = "/FollowerService/GetSuggestionsForUserRpc"
+	FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName = "/FollowerService/CheckIfFollowingConnectionExistRpc"
+	FollowerService_DeleteFollowConnectionRpc_FullMethodName          = "/FollowerService/DeleteFollowConnectionRpc"
 )
 
-// UserServiceClient is the client API for UserService service.
+// FollowerServiceClient is the client API for FollowerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UserServiceClient interface {
+type FollowerServiceClient interface {
 	WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error)
 	FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error)
 	CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -170,90 +170,90 @@ type UserServiceClient interface {
 	DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
-type userServiceClient struct {
+type followerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
-	return &userServiceClient{cc}
+func NewFollowerServiceClient(cc grpc.ClientConnInterface) FollowerServiceClient {
+	return &followerServiceClient{cc}
 }
 
-func (c *userServiceClient) WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *followerServiceClient) WriteUserRpc(ctx context.Context, in *WriteUserRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_WriteUserRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_WriteUserRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
+func (c *followerServiceClient) FindByIdRpc(ctx context.Context, in *FindByIdRequest, opts ...grpc.CallOption) (*FindByIdResponse, error) {
 	out := new(FindByIdResponse)
-	err := c.cc.Invoke(ctx, UserService_FindByIdRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_FindByIdRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *followerServiceClient) CreateFollowConnectionRpc(ctx context.Context, in *CreateFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_CreateFollowConnectionRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_CreateFollowConnectionRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) GetFollowsRpc(ctx context.Context, in *GetFollowsRequest, opts ...grpc.CallOption) (*FollowsResponse, error) {
+func (c *followerServiceClient) GetFollowsRpc(ctx context.Context, in *GetFollowsRequest, opts ...grpc.CallOption) (*FollowsResponse, error) {
 	out := new(FollowsResponse)
-	err := c.cc.Invoke(ctx, UserService_GetFollowsRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_GetFollowsRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) GetFollowersRpc(ctx context.Context, in *GetFollowersRequest, opts ...grpc.CallOption) (*FollowersResponse, error) {
+func (c *followerServiceClient) GetFollowersRpc(ctx context.Context, in *GetFollowersRequest, opts ...grpc.CallOption) (*FollowersResponse, error) {
 	out := new(FollowersResponse)
-	err := c.cc.Invoke(ctx, UserService_GetFollowersRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_GetFollowersRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) GetSuggestionsForUserRpc(ctx context.Context, in *GetSuggestionsRequest, opts ...grpc.CallOption) (*SuggestionsResponse, error) {
+func (c *followerServiceClient) GetSuggestionsForUserRpc(ctx context.Context, in *GetSuggestionsRequest, opts ...grpc.CallOption) (*SuggestionsResponse, error) {
 	out := new(SuggestionsResponse)
-	err := c.cc.Invoke(ctx, UserService_GetSuggestionsForUserRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_GetSuggestionsForUserRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) CheckIfFollowingConnectionExistRpc(ctx context.Context, in *CheckIfFollowingConnectionExistRequest, opts ...grpc.CallOption) (*CheckResponse, error) {
+func (c *followerServiceClient) CheckIfFollowingConnectionExistRpc(ctx context.Context, in *CheckIfFollowingConnectionExistRequest, opts ...grpc.CallOption) (*CheckResponse, error) {
 	out := new(CheckResponse)
-	err := c.cc.Invoke(ctx, UserService_CheckIfFollowingConnectionExistRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *followerServiceClient) DeleteFollowConnectionRpc(ctx context.Context, in *DeleteFollowConnectionRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, UserService_DeleteFollowConnectionRpc_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, FollowerService_DeleteFollowConnectionRpc_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserServiceServer is the server API for UserService service.
-// All implementations must embed UnimplementedUserServiceServer
+// FollowerServiceServer is the server API for FollowerService service.
+// All implementations must embed UnimplementedFollowerServiceServer
 // for forward compatibility
-type UserServiceServer interface {
+type FollowerServiceServer interface {
 	WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error)
 	FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error)
 	CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error)
@@ -262,232 +262,507 @@ type UserServiceServer interface {
 	GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error)
 	CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error)
 	DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error)
-	mustEmbedUnimplementedUserServiceServer()
+	mustEmbedUnimplementedFollowerServiceServer()
 }
 
-// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedUserServiceServer struct {
+// UnimplementedFollowerServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFollowerServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error) {
+func (UnimplementedFollowerServiceServer) WriteUserRpc(context.Context, *WriteUserRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WriteUserRpc not implemented")
 }
-func (UnimplementedUserServiceServer) FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
+func (UnimplementedFollowerServiceServer) FindByIdRpc(context.Context, *FindByIdRequest) (*FindByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindByIdRpc not implemented")
 }
-func (UnimplementedUserServiceServer) CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error) {
+func (UnimplementedFollowerServiceServer) CreateFollowConnectionRpc(context.Context, *CreateFollowConnectionRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFollowConnectionRpc not implemented")
 }
-func (UnimplementedUserServiceServer) GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error) {
+func (UnimplementedFollowerServiceServer) GetFollowsRpc(context.Context, *GetFollowsRequest) (*FollowsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFollowsRpc not implemented")
 }
-func (UnimplementedUserServiceServer) GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error) {
+func (UnimplementedFollowerServiceServer) GetFollowersRpc(context.Context, *GetFollowersRequest) (*FollowersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFollowersRpc not implemented")
 }
-func (UnimplementedUserServiceServer) GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error) {
+func (UnimplementedFollowerServiceServer) GetSuggestionsForUserRpc(context.Context, *GetSuggestionsRequest) (*SuggestionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSuggestionsForUserRpc not implemented")
 }
-func (UnimplementedUserServiceServer) CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error) {
+func (UnimplementedFollowerServiceServer) CheckIfFollowingConnectionExistRpc(context.Context, *CheckIfFollowingConnectionExistRequest) (*CheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckIfFollowingConnectionExistRpc not implemented")
 }
-func (UnimplementedUserServiceServer) DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error) {
+func (UnimplementedFollowerServiceServer) DeleteFollowConnectionRpc(context.Context, *DeleteFollowConnectionRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFollowConnectionRpc not implemented")
 }
-func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
+func (UnimplementedFollowerServiceServer) mustEmbedUnimplementedFollowerServiceServer() {}
 
-// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserServiceServer will
+// UnsafeFollowerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FollowerServiceServer will
 // result in compilation errors.
-type UnsafeUserServiceServer interface {
-	mustEmbedUnimplementedUserServiceServer()
+type UnsafeFollowerServiceServer interface {
+	mustEmbedUnimplementedFollowerServiceServer()
 }
 
-func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
-	s.RegisterService(&UserService_ServiceDesc, srv)
+func RegisterFollowerServiceServer(s grpc.ServiceRegistrar, srv FollowerServiceServer) {
+	s.RegisterService(&FollowerService_ServiceDesc, srv)
 }
 
-func _UserService_WriteUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_WriteUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(WriteUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).WriteUserRpc(ctx, in)
+		return srv.(FollowerServiceServer).WriteUserRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_WriteUserRpc_FullMethodName,
+		FullMethod: FollowerService_WriteUserRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).WriteUserRpc(ctx, req.(*WriteUserRequest))
+		return srv.(FollowerServiceServer).WriteUserRpc(ctx, req.(*WriteUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_FindByIdRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_FindByIdRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FindByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).FindByIdRpc(ctx, in)
+		return srv.(FollowerServiceServer).FindByIdRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_FindByIdRpc_FullMethodName,
+		FullMethod: FollowerService_FindByIdRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).FindByIdRpc(ctx, req.(*FindByIdRequest))
+		return srv.(FollowerServiceServer).FindByIdRpc(ctx, req.(*FindByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_CreateFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_CreateFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateFollowConnectionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).CreateFollowConnectionRpc(ctx, in)
+		return srv.(FollowerServiceServer).CreateFollowConnectionRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_CreateFollowConnectionRpc_FullMethodName,
+		FullMethod: FollowerService_CreateFollowConnectionRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CreateFollowConnectionRpc(ctx, req.(*CreateFollowConnectionRequest))
+		return srv.(FollowerServiceServer).CreateFollowConnectionRpc(ctx, req.(*CreateFollowConnectionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_GetFollowsRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_GetFollowsRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetFollowsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).GetFollowsRpc(ctx, in)
+		return srv.(FollowerServiceServer).GetFollowsRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_GetFollowsRpc_FullMethodName,
+		FullMethod: FollowerService_GetFollowsRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetFollowsRpc(ctx, req.(*GetFollowsRequest))
+		return srv.(FollowerServiceServer).GetFollowsRpc(ctx, req.(*GetFollowsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_GetFollowersRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_GetFollowersRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetFollowersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).GetFollowersRpc(ctx, in)
+		return srv.(FollowerServiceServer).GetFollowersRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_GetFollowersRpc_FullMethodName,
+		FullMethod: FollowerService_GetFollowersRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetFollowersRpc(ctx, req.(*GetFollowersRequest))
+		return srv.(FollowerServiceServer).GetFollowersRpc(ctx, req.(*GetFollowersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_GetSuggestionsForUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_GetSuggestionsForUserRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSuggestionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).GetSuggestionsForUserRpc(ctx, in)
+		return srv.(FollowerServiceServer).GetSuggestionsForUserRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_GetSuggestionsForUserRpc_FullMethodName,
+		FullMethod: FollowerService_GetSuggestionsForUserRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetSuggestionsForUserRpc(ctx, req.(*GetSuggestionsRequest))
+		return srv.(FollowerServiceServer).GetSuggestionsForUserRpc(ctx, req.(*GetSuggestionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_CheckIfFollowingConnectionExistRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_CheckIfFollowingConnectionExistRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckIfFollowingConnectionExistRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).CheckIfFollowingConnectionExistRpc(ctx, in)
+		return srv.(FollowerServiceServer).CheckIfFollowingConnectionExistRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_CheckIfFollowingConnectionExistRpc_FullMethodName,
+		FullMethod: FollowerService_CheckIfFollowingConnectionExistRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CheckIfFollowingConnectionExistRpc(ctx, req.(*CheckIfFollowingConnectionExistRequest))
+		return srv.(FollowerServiceServer).CheckIfFollowingConnectionExistRpc(ctx, req.(*CheckIfFollowingConnectionExistRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_DeleteFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FollowerService_DeleteFollowConnectionRpc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFollowConnectionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).DeleteFollowConnectionRpc(ctx, in)
+		return srv.(FollowerServiceServer).DeleteFollowConnectionRpc(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_DeleteFollowConnectionRpc_FullMethodName,
+		FullMethod: FollowerService_DeleteFollowConnectionRpc_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).DeleteFollowConnectionRpc(ctx, req.(*DeleteFollowConnectionRequest))
+		return srv.(FollowerServiceServer).DeleteFollowConnectionRpc(ctx, req.(*DeleteFollowConnectionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
+// FollowerService_ServiceDesc is the grpc.ServiceDesc for FollowerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "UserService",
-	HandlerType: (*UserServiceServer)(nil),
+var FollowerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "FollowerService",
+	HandlerType: (*FollowerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "WriteUserRpc",
-			Handler:    _UserService_WriteUserRpc_Handler,
+			Handler:    _FollowerService_WriteUserRpc_Handler,
 		},
 		{
 			MethodName: "FindByIdRpc",
-			Handler:    _UserService_FindByIdRpc_Handler,
+			Handler:    _FollowerService_FindByIdRpc_Handler,
 		},
 		{
 			MethodName: "CreateFollowConnectionRpc",
-			Handler:    _UserService_CreateFollowConnectionRpc_Handler,
+			Handler:    _FollowerService_CreateFollowConnectionRpc_Handler,
 		},
 		{
 			MethodName: "GetFollowsRpc",
-			Handler:    _UserService_GetFollowsRpc_Handler,
+			Handler:    _FollowerService_GetFollowsRpc_Handler,
 		},
 		{
 			MethodName: "GetFollowersRpc",
-			Handler:    _UserService_GetFollowersRpc_Handler,
+			Handler:    _FollowerService_GetFollowersRpc_Handler,
 		},
 		{
 			MethodName: "GetSuggestionsForUserRpc",
-			Handler:    _UserService_GetSuggestionsForUserRpc_Handler,
+			Handler:    _FollowerService_GetSuggestionsForUserRpc_Handler,
 		},
 		{
 			MethodName: "CheckIfFollowingConnectionExistRpc",
-			Handler:    _UserService_CheckIfFollowingConnectionExistRpc_Handler,
+			Handler:    _FollowerService_CheckIfFollowingConnectionExistRpc_Handler,
 		},
 		{
 			MethodName: "DeleteFollowConnectionRpc",
-			Handler:    _UserService_DeleteFollowConnectionRpc_Handler,
+			Handler:    _FollowerService_DeleteFollowConnectionRpc_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	TourService_FindTour_FullMethodName           = "/TourService/FindTour"
+	TourService_FindTourByAuthorId_FullMethodName = "/TourService/FindTourByAuthorId"
+	TourService_CreateTour_FullMethodName         = "/TourService/CreateTour"
+	TourService_UpdateTour_FullMethodName         = "/TourService/UpdateTour"
+	TourService_PublishTour_FullMethodName        = "/TourService/PublishTour"
+	TourService_ArchiveTour_FullMethodName        = "/TourService/ArchiveTour"
+)
+
+// TourServiceClient is the client API for TourService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type TourServiceClient interface {
+	FindTour(ctx context.Context, in *FindTourRequest, opts ...grpc.CallOption) (*TourDto, error)
+	FindTourByAuthorId(ctx context.Context, in *FindByAuthorIdRequest, opts ...grpc.CallOption) (*FindByAuthorIdResponse, error)
+	CreateTour(ctx context.Context, in *TourDto, opts ...grpc.CallOption) (*TourDto, error)
+	UpdateTour(ctx context.Context, in *TourDto, opts ...grpc.CallOption) (*TourDto, error)
+	PublishTour(ctx context.Context, in *PublishTourRequest, opts ...grpc.CallOption) (*PublishTourResponse, error)
+	ArchiveTour(ctx context.Context, in *ArchiveTourRequest, opts ...grpc.CallOption) (*ArchiveTourResponse, error)
+}
+
+type tourServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTourServiceClient(cc grpc.ClientConnInterface) TourServiceClient {
+	return &tourServiceClient{cc}
+}
+
+func (c *tourServiceClient) FindTour(ctx context.Context, in *FindTourRequest, opts ...grpc.CallOption) (*TourDto, error) {
+	out := new(TourDto)
+	err := c.cc.Invoke(ctx, TourService_FindTour_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) FindTourByAuthorId(ctx context.Context, in *FindByAuthorIdRequest, opts ...grpc.CallOption) (*FindByAuthorIdResponse, error) {
+	out := new(FindByAuthorIdResponse)
+	err := c.cc.Invoke(ctx, TourService_FindTourByAuthorId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) CreateTour(ctx context.Context, in *TourDto, opts ...grpc.CallOption) (*TourDto, error) {
+	out := new(TourDto)
+	err := c.cc.Invoke(ctx, TourService_CreateTour_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) UpdateTour(ctx context.Context, in *TourDto, opts ...grpc.CallOption) (*TourDto, error) {
+	out := new(TourDto)
+	err := c.cc.Invoke(ctx, TourService_UpdateTour_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) PublishTour(ctx context.Context, in *PublishTourRequest, opts ...grpc.CallOption) (*PublishTourResponse, error) {
+	out := new(PublishTourResponse)
+	err := c.cc.Invoke(ctx, TourService_PublishTour_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tourServiceClient) ArchiveTour(ctx context.Context, in *ArchiveTourRequest, opts ...grpc.CallOption) (*ArchiveTourResponse, error) {
+	out := new(ArchiveTourResponse)
+	err := c.cc.Invoke(ctx, TourService_ArchiveTour_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TourServiceServer is the server API for TourService service.
+// All implementations must embed UnimplementedTourServiceServer
+// for forward compatibility
+type TourServiceServer interface {
+	FindTour(context.Context, *FindTourRequest) (*TourDto, error)
+	FindTourByAuthorId(context.Context, *FindByAuthorIdRequest) (*FindByAuthorIdResponse, error)
+	CreateTour(context.Context, *TourDto) (*TourDto, error)
+	UpdateTour(context.Context, *TourDto) (*TourDto, error)
+	PublishTour(context.Context, *PublishTourRequest) (*PublishTourResponse, error)
+	ArchiveTour(context.Context, *ArchiveTourRequest) (*ArchiveTourResponse, error)
+	mustEmbedUnimplementedTourServiceServer()
+}
+
+// UnimplementedTourServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTourServiceServer struct {
+}
+
+func (UnimplementedTourServiceServer) FindTour(context.Context, *FindTourRequest) (*TourDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindTour not implemented")
+}
+func (UnimplementedTourServiceServer) FindTourByAuthorId(context.Context, *FindByAuthorIdRequest) (*FindByAuthorIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindTourByAuthorId not implemented")
+}
+func (UnimplementedTourServiceServer) CreateTour(context.Context, *TourDto) (*TourDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTour not implemented")
+}
+func (UnimplementedTourServiceServer) UpdateTour(context.Context, *TourDto) (*TourDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTour not implemented")
+}
+func (UnimplementedTourServiceServer) PublishTour(context.Context, *PublishTourRequest) (*PublishTourResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublishTour not implemented")
+}
+func (UnimplementedTourServiceServer) ArchiveTour(context.Context, *ArchiveTourRequest) (*ArchiveTourResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ArchiveTour not implemented")
+}
+func (UnimplementedTourServiceServer) mustEmbedUnimplementedTourServiceServer() {}
+
+// UnsafeTourServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TourServiceServer will
+// result in compilation errors.
+type UnsafeTourServiceServer interface {
+	mustEmbedUnimplementedTourServiceServer()
+}
+
+func RegisterTourServiceServer(s grpc.ServiceRegistrar, srv TourServiceServer) {
+	s.RegisterService(&TourService_ServiceDesc, srv)
+}
+
+func _TourService_FindTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindTourRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).FindTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_FindTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).FindTour(ctx, req.(*FindTourRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_FindTourByAuthorId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindByAuthorIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).FindTourByAuthorId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_FindTourByAuthorId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).FindTourByAuthorId(ctx, req.(*FindByAuthorIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_CreateTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TourDto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).CreateTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_CreateTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).CreateTour(ctx, req.(*TourDto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_UpdateTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TourDto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).UpdateTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_UpdateTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).UpdateTour(ctx, req.(*TourDto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_PublishTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublishTourRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).PublishTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_PublishTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).PublishTour(ctx, req.(*PublishTourRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TourService_ArchiveTour_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArchiveTourRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TourServiceServer).ArchiveTour(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TourService_ArchiveTour_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TourServiceServer).ArchiveTour(ctx, req.(*ArchiveTourRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TourService_ServiceDesc is the grpc.ServiceDesc for TourService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var TourService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "TourService",
+	HandlerType: (*TourServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FindTour",
+			Handler:    _TourService_FindTour_Handler,
+		},
+		{
+			MethodName: "FindTourByAuthorId",
+			Handler:    _TourService_FindTourByAuthorId_Handler,
+		},
+		{
+			MethodName: "CreateTour",
+			Handler:    _TourService_CreateTour_Handler,
+		},
+		{
+			MethodName: "UpdateTour",
+			Handler:    _TourService_UpdateTour_Handler,
+		},
+		{
+			MethodName: "PublishTour",
+			Handler:    _TourService_PublishTour_Handler,
+		},
+		{
+			MethodName: "ArchiveTour",
+			Handler:    _TourService_ArchiveTour_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -56,6 +56,17 @@ func main() {
 		log.Fatalln("Failed to dial AnotherService server:", err)
 	}
 
+	conn4, err := grpc.DialContext(
+		context.Background(),
+		cfg.TourServiceAddress,
+		grpc.WithBlock(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
+	}
+
 	gwmux := runtime.NewServeMux()
 	// Register Greeter
 	client := greeter.NewGreeterServiceClient(conn)
@@ -68,11 +79,21 @@ func main() {
 		log.Fatalln("Failed to register gateway:", err)
 	}
 
-	client2 := greeter.NewUserServiceClient(conn2)
-	err = greeter.RegisterUserServiceHandlerClient(
+	client2 := greeter.NewFollowerServiceClient(conn2)
+	err = greeter.RegisterFollowerServiceHandlerClient(
 		context.Background(),
 		gwmux,
 		client2,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register AnotherService gateway:", err)
+	}
+
+	client4 := greeter.NewTourServiceClient(conn4)
+	err = greeter.RegisterTourServiceHandlerClient(
+		context.Background(),
+		gwmux,
+		client4,
 	)
 	if err != nil {
 		log.Fatalln("Failed to register AnotherService gateway:", err)
