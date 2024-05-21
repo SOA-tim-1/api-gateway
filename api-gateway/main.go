@@ -33,10 +33,12 @@ import (
 
 func main() {
 	cfg := config.GetConfig()
+	log.Printf("Starting server with config: %+v\n", cfg)
 
 	conn, err := grpc.DialContext(
 		context.Background(),
-		cfg.GreeterServiceAddress,
+		// cfg.GreeterServiceAddress,
+		":8095",
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -47,7 +49,8 @@ func main() {
 
 	conn2, err := grpc.DialContext(
 		context.Background(),
-		cfg.FollowerServiceAddress, // Adresa novog servisa
+		// cfg.FollowerServiceAddress,
+		":8092", // Adresa novog servisa
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -58,7 +61,8 @@ func main() {
 
 	conn4, err := grpc.DialContext(
 		context.Background(),
-		cfg.TourServiceAddress,
+		// cfg.TourServiceAddress,
+		":8090",
 		grpc.WithBlock(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -102,13 +106,15 @@ func main() {
 	//handler := authMiddleware(gwmux)
 
 	gwServer := &http.Server{
-		Addr:    cfg.Address,
+		Addr:    "localhost:8000",
 		Handler: gwmux,
 	}
 
 	go func() {
+		log.Println("Starting HTTP server at localhost:8000")
 		if err := gwServer.ListenAndServe(); err != nil {
-			log.Fatal("server error: ", err)
+			//log.Fatal("server error: ", err)
+			log.Fatalf("HTTP server ListenAndServe: %v", err)
 		}
 	}()
 
@@ -117,7 +123,9 @@ func main() {
 
 	<-stopCh
 
+	log.Println("Shutting down the server...")
 	if err = gwServer.Close(); err != nil {
 		log.Fatalln("error while stopping server: ", err)
 	}
+	log.Println("Server stopped gracefully")
 }

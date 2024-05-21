@@ -1,22 +1,23 @@
 package main
 
 import (
-	"example/grpc/config"
 	"example/grpc/handlers"
 	"example/grpc/proto/greeter"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
-	cfg := config.GetConfig()
+	// cfg := config.GetConfig()
 
-	listener, err := net.Listen("tcp", cfg.Address)
+	// listener, err := net.Listen("tcp", cfg.Address)
+	listener, err := net.Listen("tcp", "8095")
 	if err != nil {
 		log.Fatalln(err)
 	}
