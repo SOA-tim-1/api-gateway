@@ -768,3 +768,204 @@ var TourService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "greeter/greeter-service.proto",
 }
+
+const (
+	CheckpointService_FindCheckpoint_FullMethodName         = "/CheckpointService/FindCheckpoint"
+	CheckpointService_FindCheckpointByTourId_FullMethodName = "/CheckpointService/FindCheckpointByTourId"
+	CheckpointService_CreateCheckpoint_FullMethodName       = "/CheckpointService/CreateCheckpoint"
+	CheckpointService_DeleteCheckpoint_FullMethodName       = "/CheckpointService/DeleteCheckpoint"
+)
+
+// CheckpointServiceClient is the client API for CheckpointService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CheckpointServiceClient interface {
+	FindCheckpoint(ctx context.Context, in *FindCheckpointRequest, opts ...grpc.CallOption) (*CheckpointDto, error)
+	FindCheckpointByTourId(ctx context.Context, in *FindByTourIdRequest, opts ...grpc.CallOption) (*FindByTourIdResponse, error)
+	CreateCheckpoint(ctx context.Context, in *CheckpointDto, opts ...grpc.CallOption) (*CheckpointDto, error)
+	DeleteCheckpoint(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error)
+}
+
+type checkpointServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCheckpointServiceClient(cc grpc.ClientConnInterface) CheckpointServiceClient {
+	return &checkpointServiceClient{cc}
+}
+
+func (c *checkpointServiceClient) FindCheckpoint(ctx context.Context, in *FindCheckpointRequest, opts ...grpc.CallOption) (*CheckpointDto, error) {
+	out := new(CheckpointDto)
+	err := c.cc.Invoke(ctx, CheckpointService_FindCheckpoint_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *checkpointServiceClient) FindCheckpointByTourId(ctx context.Context, in *FindByTourIdRequest, opts ...grpc.CallOption) (*FindByTourIdResponse, error) {
+	out := new(FindByTourIdResponse)
+	err := c.cc.Invoke(ctx, CheckpointService_FindCheckpointByTourId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *checkpointServiceClient) CreateCheckpoint(ctx context.Context, in *CheckpointDto, opts ...grpc.CallOption) (*CheckpointDto, error) {
+	out := new(CheckpointDto)
+	err := c.cc.Invoke(ctx, CheckpointService_CreateCheckpoint_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *checkpointServiceClient) DeleteCheckpoint(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResponse, error) {
+	out := new(DeleteResponse)
+	err := c.cc.Invoke(ctx, CheckpointService_DeleteCheckpoint_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CheckpointServiceServer is the server API for CheckpointService service.
+// All implementations must embed UnimplementedCheckpointServiceServer
+// for forward compatibility
+type CheckpointServiceServer interface {
+	FindCheckpoint(context.Context, *FindCheckpointRequest) (*CheckpointDto, error)
+	FindCheckpointByTourId(context.Context, *FindByTourIdRequest) (*FindByTourIdResponse, error)
+	CreateCheckpoint(context.Context, *CheckpointDto) (*CheckpointDto, error)
+	DeleteCheckpoint(context.Context, *DeleteRequest) (*DeleteResponse, error)
+	mustEmbedUnimplementedCheckpointServiceServer()
+}
+
+// UnimplementedCheckpointServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCheckpointServiceServer struct {
+}
+
+func (UnimplementedCheckpointServiceServer) FindCheckpoint(context.Context, *FindCheckpointRequest) (*CheckpointDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindCheckpoint not implemented")
+}
+func (UnimplementedCheckpointServiceServer) FindCheckpointByTourId(context.Context, *FindByTourIdRequest) (*FindByTourIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindCheckpointByTourId not implemented")
+}
+func (UnimplementedCheckpointServiceServer) CreateCheckpoint(context.Context, *CheckpointDto) (*CheckpointDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCheckpoint not implemented")
+}
+func (UnimplementedCheckpointServiceServer) DeleteCheckpoint(context.Context, *DeleteRequest) (*DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCheckpoint not implemented")
+}
+func (UnimplementedCheckpointServiceServer) mustEmbedUnimplementedCheckpointServiceServer() {}
+
+// UnsafeCheckpointServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CheckpointServiceServer will
+// result in compilation errors.
+type UnsafeCheckpointServiceServer interface {
+	mustEmbedUnimplementedCheckpointServiceServer()
+}
+
+func RegisterCheckpointServiceServer(s grpc.ServiceRegistrar, srv CheckpointServiceServer) {
+	s.RegisterService(&CheckpointService_ServiceDesc, srv)
+}
+
+func _CheckpointService_FindCheckpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindCheckpointRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CheckpointServiceServer).FindCheckpoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CheckpointService_FindCheckpoint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CheckpointServiceServer).FindCheckpoint(ctx, req.(*FindCheckpointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CheckpointService_FindCheckpointByTourId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindByTourIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CheckpointServiceServer).FindCheckpointByTourId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CheckpointService_FindCheckpointByTourId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CheckpointServiceServer).FindCheckpointByTourId(ctx, req.(*FindByTourIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CheckpointService_CreateCheckpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckpointDto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CheckpointServiceServer).CreateCheckpoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CheckpointService_CreateCheckpoint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CheckpointServiceServer).CreateCheckpoint(ctx, req.(*CheckpointDto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CheckpointService_DeleteCheckpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CheckpointServiceServer).DeleteCheckpoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CheckpointService_DeleteCheckpoint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CheckpointServiceServer).DeleteCheckpoint(ctx, req.(*DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CheckpointService_ServiceDesc is the grpc.ServiceDesc for CheckpointService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CheckpointService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "CheckpointService",
+	HandlerType: (*CheckpointServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FindCheckpoint",
+			Handler:    _CheckpointService_FindCheckpoint_Handler,
+		},
+		{
+			MethodName: "FindCheckpointByTourId",
+			Handler:    _CheckpointService_FindCheckpointByTourId_Handler,
+		},
+		{
+			MethodName: "CreateCheckpoint",
+			Handler:    _CheckpointService_CreateCheckpoint_Handler,
+		},
+		{
+			MethodName: "DeleteCheckpoint",
+			Handler:    _CheckpointService_DeleteCheckpoint_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}

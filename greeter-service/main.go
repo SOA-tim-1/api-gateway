@@ -17,7 +17,7 @@ func main() {
 	// cfg := config.GetConfig()
 
 	// listener, err := net.Listen("tcp", cfg.Address)
-	listener, err := net.Listen("tcp", "8095")
+	listener, err := net.Listen("tcp", ":8095")
 	if err != nil {
 		log.Fatalln(err)
 	}
