@@ -292,3 +292,87 @@ message DeleteFollowConnectionRequest {
   }
   
   message DeleteResponse {}
+
+  service Authorize {
+    rpc Authorize (Credentials) returns (AuthenticationTokens) {
+      option (google.api.http) = {
+        post: "/api/users/login"
+        body: "*"
+      };
+    }
+    rpc Register (AccountRegistration) returns (AuthenticationTokens) {
+      option (google.api.http) = {
+        post: "/api/users"
+        body: "*"
+      };
+    }
+  }
+
+  message Credentials {
+    string Username = 1;
+    string Password = 2;
+  }
+  
+  message AuthenticationTokens {
+    int32 Id = 1;
+    string AccessToken = 2;
+  }
+  
+  message AccountRegistration {
+    string Username = 1;
+    string Password = 2;
+    string Email = 3;
+    string Name = 4;
+    string Surname = 5;
+    UserRole Role = 6;
+  }
+  
+  enum UserRole {
+    Administrator = 0;
+    Author = 1;
+    Tourist = 2;
+  }
+
+  service UserService {
+    rpc GetById (UserIdRequest) returns (UserDto) {
+      option (google.api.http) = {
+        get: "/api/users/{userId}"
+      };
+    }
+  }
+  
+  service PersonService {
+    rpc GetByUserId (PersonIdRequest) returns (PersonDto) {
+      option (google.api.http) = {
+        get: "/api/person/{userId}"
+      };
+    }
+  }
+
+  message UserIdRequest {
+    int64 userId = 1;
+  }
+  
+  message UserDto {
+    int64 Id = 1;
+    string Username = 2;
+    UserRole Role = 3;
+    bool IsActive = 4;
+  }
+  
+  message PersonIdRequest {
+    int32 userId = 1;
+  }
+  
+  message PersonDto {
+    int64 Id = 1;
+    int64 UserId = 2;
+    string Name = 3;
+    string Surname = 4;
+    string Email = 5;
+    string Motto = 6;
+    string Biography = 7;
+    string Image = 8;
+    double Latitude = 9;
+    double Longitude = 10;
+  }
