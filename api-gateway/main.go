@@ -129,6 +129,18 @@ func main() {
 		log.Fatalln("Failed to dial server:", err)
 	}
 
+	logger.Println("Creating gRPC connection to the Stakeholders service...")
+	conn5, err := grpc.DialContext(
+		context.Background(),
+		":44332",
+		grpc.WithBlock(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
+	}
+
 	logger.Println("Creating ServeMux for gRPC Gateway...")
 	gwmux := runtime.NewServeMux()
 
@@ -177,6 +189,17 @@ func main() {
 	)
 	if err != nil {
 		log.Fatalln("Failed to register AnotherService gateway:", err)
+	}
+
+	client6 := greeter.NewAuthorizeClient(conn5)
+	logger.Println("Registering Authorize service handler...")
+	err = greeter.RegisterAuthorizeHandlerClient(
+		context.Background(),
+		gwmux,
+		client6,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register Authorize Service gateway:", err)
 	}
 
 	//handler := authMiddleware(gwmux)
