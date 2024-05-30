@@ -169,6 +169,55 @@ func (TravelMethod) EnumDescriptor() ([]byte, []int) {
 	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{2}
 }
 
+type UserRole int32
+
+const (
+	UserRole_Administrator UserRole = 0
+	UserRole_Author        UserRole = 1
+	UserRole_Tourist       UserRole = 2
+)
+
+// Enum value maps for UserRole.
+var (
+	UserRole_name = map[int32]string{
+		0: "Administrator",
+		1: "Author",
+		2: "Tourist",
+	}
+	UserRole_value = map[string]int32{
+		"Administrator": 0,
+		"Author":        1,
+		"Tourist":       2,
+	}
+)
+
+func (x UserRole) Enum() *UserRole {
+	p := new(UserRole)
+	*p = x
+	return p
+}
+
+func (x UserRole) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserRole) Descriptor() protoreflect.EnumDescriptor {
+	return file_greeter_greeter_service_proto_enumTypes[3].Descriptor()
+}
+
+func (UserRole) Type() protoreflect.EnumType {
+	return &file_greeter_greeter_service_proto_enumTypes[3]
+}
+
+func (x UserRole) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserRole.Descriptor instead.
+func (UserRole) EnumDescriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{3}
+}
+
 type Request struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1940,6 +1989,487 @@ func (*DeleteResponse) Descriptor() ([]byte, []int) {
 	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{33}
 }
 
+type Credentials struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username string `protobuf:"bytes,1,opt,name=Username,proto3" json:"Username,omitempty"`
+	Password string `protobuf:"bytes,2,opt,name=Password,proto3" json:"Password,omitempty"`
+}
+
+func (x *Credentials) Reset() {
+	*x = Credentials{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Credentials) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Credentials) ProtoMessage() {}
+
+func (x *Credentials) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Credentials.ProtoReflect.Descriptor instead.
+func (*Credentials) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *Credentials) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Credentials) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type AuthenticationTokens struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id          int32  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	AccessToken string `protobuf:"bytes,2,opt,name=AccessToken,proto3" json:"AccessToken,omitempty"`
+}
+
+func (x *AuthenticationTokens) Reset() {
+	*x = AuthenticationTokens{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AuthenticationTokens) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticationTokens) ProtoMessage() {}
+
+func (x *AuthenticationTokens) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticationTokens.ProtoReflect.Descriptor instead.
+func (*AuthenticationTokens) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *AuthenticationTokens) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AuthenticationTokens) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+type AccountRegistration struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username string   `protobuf:"bytes,1,opt,name=Username,proto3" json:"Username,omitempty"`
+	Password string   `protobuf:"bytes,2,opt,name=Password,proto3" json:"Password,omitempty"`
+	Email    string   `protobuf:"bytes,3,opt,name=Email,proto3" json:"Email,omitempty"`
+	Name     string   `protobuf:"bytes,4,opt,name=Name,proto3" json:"Name,omitempty"`
+	Surname  string   `protobuf:"bytes,5,opt,name=Surname,proto3" json:"Surname,omitempty"`
+	Role     UserRole `protobuf:"varint,6,opt,name=Role,proto3,enum=UserRole" json:"Role,omitempty"`
+}
+
+func (x *AccountRegistration) Reset() {
+	*x = AccountRegistration{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AccountRegistration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountRegistration) ProtoMessage() {}
+
+func (x *AccountRegistration) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountRegistration.ProtoReflect.Descriptor instead.
+func (*AccountRegistration) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *AccountRegistration) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *AccountRegistration) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *AccountRegistration) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *AccountRegistration) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AccountRegistration) GetSurname() string {
+	if x != nil {
+		return x.Surname
+	}
+	return ""
+}
+
+func (x *AccountRegistration) GetRole() UserRole {
+	if x != nil {
+		return x.Role
+	}
+	return UserRole_Administrator
+}
+
+type UserIdRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId int64 `protobuf:"varint,1,opt,name=userId,proto3" json:"userId,omitempty"`
+}
+
+func (x *UserIdRequest) Reset() {
+	*x = UserIdRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserIdRequest) ProtoMessage() {}
+
+func (x *UserIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserIdRequest.ProtoReflect.Descriptor instead.
+func (*UserIdRequest) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *UserIdRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type UserDto struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       int64    `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	Username string   `protobuf:"bytes,2,opt,name=Username,proto3" json:"Username,omitempty"`
+	Role     UserRole `protobuf:"varint,3,opt,name=Role,proto3,enum=UserRole" json:"Role,omitempty"`
+	IsActive bool     `protobuf:"varint,4,opt,name=IsActive,proto3" json:"IsActive,omitempty"`
+}
+
+func (x *UserDto) Reset() {
+	*x = UserDto{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[38]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserDto) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDto) ProtoMessage() {}
+
+func (x *UserDto) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[38]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDto.ProtoReflect.Descriptor instead.
+func (*UserDto) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *UserDto) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UserDto) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *UserDto) GetRole() UserRole {
+	if x != nil {
+		return x.Role
+	}
+	return UserRole_Administrator
+}
+
+func (x *UserDto) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+type PersonIdRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId int32 `protobuf:"varint,1,opt,name=userId,proto3" json:"userId,omitempty"`
+}
+
+func (x *PersonIdRequest) Reset() {
+	*x = PersonIdRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[39]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PersonIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersonIdRequest) ProtoMessage() {}
+
+func (x *PersonIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[39]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersonIdRequest.ProtoReflect.Descriptor instead.
+func (*PersonIdRequest) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *PersonIdRequest) GetUserId() int32 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type PersonDto struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	UserId    int64   `protobuf:"varint,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	Name      string  `protobuf:"bytes,3,opt,name=Name,proto3" json:"Name,omitempty"`
+	Surname   string  `protobuf:"bytes,4,opt,name=Surname,proto3" json:"Surname,omitempty"`
+	Email     string  `protobuf:"bytes,5,opt,name=Email,proto3" json:"Email,omitempty"`
+	Motto     string  `protobuf:"bytes,6,opt,name=Motto,proto3" json:"Motto,omitempty"`
+	Biography string  `protobuf:"bytes,7,opt,name=Biography,proto3" json:"Biography,omitempty"`
+	Image     string  `protobuf:"bytes,8,opt,name=Image,proto3" json:"Image,omitempty"`
+	Latitude  float64 `protobuf:"fixed64,9,opt,name=Latitude,proto3" json:"Latitude,omitempty"`
+	Longitude float64 `protobuf:"fixed64,10,opt,name=Longitude,proto3" json:"Longitude,omitempty"`
+}
+
+func (x *PersonDto) Reset() {
+	*x = PersonDto{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_greeter_greeter_service_proto_msgTypes[40]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PersonDto) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersonDto) ProtoMessage() {}
+
+func (x *PersonDto) ProtoReflect() protoreflect.Message {
+	mi := &file_greeter_greeter_service_proto_msgTypes[40]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersonDto.ProtoReflect.Descriptor instead.
+func (*PersonDto) Descriptor() ([]byte, []int) {
+	return file_greeter_greeter_service_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *PersonDto) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *PersonDto) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *PersonDto) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PersonDto) GetSurname() string {
+	if x != nil {
+		return x.Surname
+	}
+	return ""
+}
+
+func (x *PersonDto) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *PersonDto) GetMotto() string {
+	if x != nil {
+		return x.Motto
+	}
+	return ""
+}
+
+func (x *PersonDto) GetBiography() string {
+	if x != nil {
+		return x.Biography
+	}
+	return ""
+}
+
+func (x *PersonDto) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *PersonDto) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
+func (x *PersonDto) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
 var File_greeter_greeter_service_proto protoreflect.FileDescriptor
 
 var file_greeter_greeter_service_proto_rawDesc = []byte{
@@ -2100,16 +2630,68 @@ var file_greeter_greeter_service_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x74, 0x73, 0x22, 0x1f, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x10, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2a, 0x30, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x52, 0x41, 0x46, 0x54, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09,
-	0x50, 0x55, 0x42, 0x4c, 0x49, 0x53, 0x48, 0x45, 0x44, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x41,
-	0x52, 0x43, 0x48, 0x49, 0x56, 0x45, 0x44, 0x10, 0x02, 0x2a, 0x2b, 0x0a, 0x09, 0x44, 0x69, 0x66,
-	0x66, 0x69, 0x63, 0x75, 0x6c, 0x74, 0x12, 0x08, 0x0a, 0x04, 0x45, 0x41, 0x53, 0x59, 0x10, 0x00,
-	0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x45, 0x44, 0x49, 0x55, 0x4d, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04,
-	0x48, 0x41, 0x52, 0x44, 0x10, 0x02, 0x2a, 0x31, 0x0a, 0x0c, 0x54, 0x72, 0x61, 0x76, 0x65, 0x6c,
-	0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x07, 0x0a, 0x03, 0x43, 0x41, 0x52, 0x10, 0x00, 0x12,
-	0x0b, 0x0a, 0x07, 0x42, 0x49, 0x43, 0x59, 0x43, 0x4c, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07,
-	0x57, 0x41, 0x4c, 0x4b, 0x49, 0x4e, 0x47, 0x10, 0x02, 0x32, 0x69, 0x0a, 0x0e, 0x47, 0x72, 0x65,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x45, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x64, 0x65,
+	0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x48,
+	0x0a, 0x14, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x02, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x41, 0x63, 0x63,
+	0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0xb0, 0x01, 0x0a, 0x13, 0x41, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x1a, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08,
+	0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x45, 0x6d, 0x61, 0x69,
+	0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x12,
+	0x0a, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61,
+	0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x53, 0x75, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x53, 0x75, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x04,
+	0x52, 0x6f, 0x6c, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x09, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x22, 0x27, 0x0a, 0x0d, 0x55,
+	0x73, 0x65, 0x72, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x75, 0x73,
+	0x65, 0x72, 0x49, 0x64, 0x22, 0x70, 0x0a, 0x07, 0x55, 0x73, 0x65, 0x72, 0x44, 0x74, 0x6f, 0x12,
+	0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x49, 0x64, 0x12,
+	0x1a, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x04, 0x52,
+	0x6f, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x09, 0x2e, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x6f, 0x6c, 0x65, 0x52, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x49, 0x73,
+	0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x49, 0x73,
+	0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x22, 0x29, 0x0a, 0x0f, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e,
+	0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49,
+	0x64, 0x22, 0xfb, 0x01, 0x0a, 0x09, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x44, 0x74, 0x6f, 0x12,
+	0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x49, 0x64, 0x12,
+	0x16, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x53,
+	0x75, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x53, 0x75,
+	0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x14, 0x0a, 0x05, 0x4d,
+	0x6f, 0x74, 0x74, 0x6f, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x4d, 0x6f, 0x74, 0x74,
+	0x6f, 0x12, 0x1c, 0x0a, 0x09, 0x42, 0x69, 0x6f, 0x67, 0x72, 0x61, 0x70, 0x68, 0x79, 0x18, 0x07,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x42, 0x69, 0x6f, 0x67, 0x72, 0x61, 0x70, 0x68, 0x79, 0x12,
+	0x14, 0x0a, 0x05, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x49, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x4c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64,
+	0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x01, 0x52, 0x08, 0x4c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64,
+	0x65, 0x12, 0x1c, 0x0a, 0x09, 0x4c, 0x6f, 0x6e, 0x67, 0x69, 0x74, 0x75, 0x64, 0x65, 0x18, 0x0a,
+	0x20, 0x01, 0x28, 0x01, 0x52, 0x09, 0x4c, 0x6f, 0x6e, 0x67, 0x69, 0x74, 0x75, 0x64, 0x65, 0x2a,
+	0x30, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x52, 0x41,
+	0x46, 0x54, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x55, 0x42, 0x4c, 0x49, 0x53, 0x48, 0x45,
+	0x44, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x52, 0x43, 0x48, 0x49, 0x56, 0x45, 0x44, 0x10,
+	0x02, 0x2a, 0x2b, 0x0a, 0x09, 0x44, 0x69, 0x66, 0x66, 0x69, 0x63, 0x75, 0x6c, 0x74, 0x12, 0x08,
+	0x0a, 0x04, 0x45, 0x41, 0x53, 0x59, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x4d, 0x45, 0x44, 0x49,
+	0x55, 0x4d, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x48, 0x41, 0x52, 0x44, 0x10, 0x02, 0x2a, 0x31,
+	0x0a, 0x0c, 0x54, 0x72, 0x61, 0x76, 0x65, 0x6c, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x07,
+	0x0a, 0x03, 0x43, 0x41, 0x52, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x42, 0x49, 0x43, 0x59, 0x43,
+	0x4c, 0x45, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x57, 0x41, 0x4c, 0x4b, 0x49, 0x4e, 0x47, 0x10,
+	0x02, 0x2a, 0x36, 0x0a, 0x08, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x11, 0x0a,
+	0x0d, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x10, 0x00,
+	0x12, 0x0a, 0x0a, 0x06, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07,
+	0x54, 0x6f, 0x75, 0x72, 0x69, 0x73, 0x74, 0x10, 0x02, 0x32, 0x69, 0x0a, 0x0e, 0x47, 0x72, 0x65,
 	0x65, 0x74, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2a, 0x0a, 0x05, 0x47,
 	0x72, 0x65, 0x65, 0x74, 0x12, 0x08, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x09,
 	0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x0c, 0x82, 0xd3, 0xe4, 0x93, 0x02,
@@ -2228,8 +2810,30 @@ var file_greeter_greeter_service_proto_rawDesc = []byte{
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x0f, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x2a, 0x14, 0x2f,
 	0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x2f, 0x7b,
-	0x69, 0x64, 0x7d, 0x42, 0x0f, 0x5a, 0x0d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x72, 0x65,
-	0x65, 0x74, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x64, 0x7d, 0x32, 0xaa, 0x01, 0x0a, 0x09, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a,
+	0x65, 0x12, 0x4d, 0x0a, 0x09, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x12, 0x0c,
+	0x2e, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x1a, 0x15, 0x2e, 0x41,
+	0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x73, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x3a, 0x01, 0x2a, 0x22, 0x10,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2f, 0x6c, 0x6f, 0x67, 0x69, 0x6e,
+	0x12, 0x4e, 0x0a, 0x08, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x12, 0x14, 0x2e, 0x41,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x1a, 0x15, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x22, 0x15, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x0f, 0x3a, 0x01, 0x2a, 0x22, 0x0a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73,
+	0x32, 0x4f, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
+	0x40, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x42, 0x79, 0x49, 0x64, 0x12, 0x0e, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x08, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x44, 0x74, 0x6f, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x15, 0x12, 0x13, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2f, 0x7b, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x7d, 0x32, 0x5a, 0x0a, 0x0d, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x12, 0x49, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72, 0x49,
+	0x64, 0x12, 0x10, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x0a, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x44, 0x74, 0x6f, 0x22,
+	0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x12, 0x14, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x65,
+	0x72, 0x73, 0x6f, 0x6e, 0x2f, 0x7b, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x7d, 0x42, 0x0f, 0x5a,
+	0x0d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x72, 0x65, 0x65, 0x74, 0x65, 0x72, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2244,106 +2848,124 @@ func file_greeter_greeter_service_proto_rawDescGZIP() []byte {
 	return file_greeter_greeter_service_proto_rawDescData
 }
 
-var file_greeter_greeter_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_greeter_greeter_service_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_greeter_greeter_service_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_greeter_greeter_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_greeter_greeter_service_proto_goTypes = []interface{}{
 	(Status)(0),                                    // 0: Status
 	(Difficult)(0),                                 // 1: Difficult
 	(TravelMethod)(0),                              // 2: TravelMethod
-	(*Request)(nil),                                // 3: Request
-	(*Response)(nil),                               // 4: Response
-	(*FollowerDto)(nil),                            // 5: FollowerDto
-	(*WriteUserRequest)(nil),                       // 6: WriteUserRequest
-	(*FindByIdResponse)(nil),                       // 7: FindByIdResponse
-	(*Followers)(nil),                              // 8: Followers
-	(*Empty)(nil),                                  // 9: Empty
-	(*FindByIdRequest)(nil),                        // 10: FindByIdRequest
-	(*CreateFollowConnectionRequest)(nil),          // 11: CreateFollowConnectionRequest
-	(*GetFollowsRequest)(nil),                      // 12: GetFollowsRequest
-	(*GetFollowersRequest)(nil),                    // 13: GetFollowersRequest
-	(*GetSuggestionsRequest)(nil),                  // 14: GetSuggestionsRequest
-	(*CheckIfFollowingConnectionExistRequest)(nil), // 15: CheckIfFollowingConnectionExistRequest
-	(*FollowsResponse)(nil),                        // 16: FollowsResponse
-	(*FollowersResponse)(nil),                      // 17: FollowersResponse
-	(*SuggestionsResponse)(nil),                    // 18: SuggestionsResponse
-	(*CheckResponse)(nil),                          // 19: CheckResponse
-	(*DeleteFollowConnectionRequest)(nil),          // 20: DeleteFollowConnectionRequest
-	(*TourDto)(nil),                                // 21: TourDto
-	(*CheckpointDto)(nil),                          // 22: CheckpointDto
-	(*EquipmentDto)(nil),                           // 23: EquipmentDto
-	(*TravelTimeAndMethodDto)(nil),                 // 24: TravelTimeAndMethodDto
-	(*FindTourRequest)(nil),                        // 25: FindTourRequest
-	(*FindByAuthorIdRequest)(nil),                  // 26: FindByAuthorIdRequest
-	(*FindByAuthorIdResponse)(nil),                 // 27: FindByAuthorIdResponse
-	(*PublishTourRequest)(nil),                     // 28: PublishTourRequest
-	(*PublishTourResponse)(nil),                    // 29: PublishTourResponse
-	(*ArchiveTourRequest)(nil),                     // 30: ArchiveTourRequest
-	(*ArchiveTourResponse)(nil),                    // 31: ArchiveTourResponse
-	(*FindCheckpointRequest)(nil),                  // 32: FindCheckpointRequest
-	(*FindByTourIdRequest)(nil),                    // 33: FindByTourIdRequest
-	(*FindByTourIdResponse)(nil),                   // 34: FindByTourIdResponse
-	(*DeleteRequest)(nil),                          // 35: DeleteRequest
-	(*DeleteResponse)(nil),                         // 36: DeleteResponse
-	(*timestamppb.Timestamp)(nil),                  // 37: google.protobuf.Timestamp
+	(UserRole)(0),                                  // 3: UserRole
+	(*Request)(nil),                                // 4: Request
+	(*Response)(nil),                               // 5: Response
+	(*FollowerDto)(nil),                            // 6: FollowerDto
+	(*WriteUserRequest)(nil),                       // 7: WriteUserRequest
+	(*FindByIdResponse)(nil),                       // 8: FindByIdResponse
+	(*Followers)(nil),                              // 9: Followers
+	(*Empty)(nil),                                  // 10: Empty
+	(*FindByIdRequest)(nil),                        // 11: FindByIdRequest
+	(*CreateFollowConnectionRequest)(nil),          // 12: CreateFollowConnectionRequest
+	(*GetFollowsRequest)(nil),                      // 13: GetFollowsRequest
+	(*GetFollowersRequest)(nil),                    // 14: GetFollowersRequest
+	(*GetSuggestionsRequest)(nil),                  // 15: GetSuggestionsRequest
+	(*CheckIfFollowingConnectionExistRequest)(nil), // 16: CheckIfFollowingConnectionExistRequest
+	(*FollowsResponse)(nil),                        // 17: FollowsResponse
+	(*FollowersResponse)(nil),                      // 18: FollowersResponse
+	(*SuggestionsResponse)(nil),                    // 19: SuggestionsResponse
+	(*CheckResponse)(nil),                          // 20: CheckResponse
+	(*DeleteFollowConnectionRequest)(nil),          // 21: DeleteFollowConnectionRequest
+	(*TourDto)(nil),                                // 22: TourDto
+	(*CheckpointDto)(nil),                          // 23: CheckpointDto
+	(*EquipmentDto)(nil),                           // 24: EquipmentDto
+	(*TravelTimeAndMethodDto)(nil),                 // 25: TravelTimeAndMethodDto
+	(*FindTourRequest)(nil),                        // 26: FindTourRequest
+	(*FindByAuthorIdRequest)(nil),                  // 27: FindByAuthorIdRequest
+	(*FindByAuthorIdResponse)(nil),                 // 28: FindByAuthorIdResponse
+	(*PublishTourRequest)(nil),                     // 29: PublishTourRequest
+	(*PublishTourResponse)(nil),                    // 30: PublishTourResponse
+	(*ArchiveTourRequest)(nil),                     // 31: ArchiveTourRequest
+	(*ArchiveTourResponse)(nil),                    // 32: ArchiveTourResponse
+	(*FindCheckpointRequest)(nil),                  // 33: FindCheckpointRequest
+	(*FindByTourIdRequest)(nil),                    // 34: FindByTourIdRequest
+	(*FindByTourIdResponse)(nil),                   // 35: FindByTourIdResponse
+	(*DeleteRequest)(nil),                          // 36: DeleteRequest
+	(*DeleteResponse)(nil),                         // 37: DeleteResponse
+	(*Credentials)(nil),                            // 38: Credentials
+	(*AuthenticationTokens)(nil),                   // 39: AuthenticationTokens
+	(*AccountRegistration)(nil),                    // 40: AccountRegistration
+	(*UserIdRequest)(nil),                          // 41: UserIdRequest
+	(*UserDto)(nil),                                // 42: UserDto
+	(*PersonIdRequest)(nil),                        // 43: PersonIdRequest
+	(*PersonDto)(nil),                              // 44: PersonDto
+	(*timestamppb.Timestamp)(nil),                  // 45: google.protobuf.Timestamp
 }
 var file_greeter_greeter_service_proto_depIdxs = []int32{
-	5,  // 0: WriteUserRequest.userDto:type_name -> FollowerDto
-	5,  // 1: FindByIdResponse.userDto:type_name -> FollowerDto
+	6,  // 0: WriteUserRequest.userDto:type_name -> FollowerDto
+	6,  // 1: FindByIdResponse.userDto:type_name -> FollowerDto
 	1,  // 2: TourDto.difficult:type_name -> Difficult
 	0,  // 3: TourDto.status:type_name -> Status
-	22, // 4: TourDto.checkpoints:type_name -> CheckpointDto
-	37, // 5: TourDto.publish_time:type_name -> google.protobuf.Timestamp
-	37, // 6: TourDto.archive_time:type_name -> google.protobuf.Timestamp
-	23, // 7: TourDto.equipments:type_name -> EquipmentDto
-	24, // 8: TourDto.travel_time_and_method:type_name -> TravelTimeAndMethodDto
+	23, // 4: TourDto.checkpoints:type_name -> CheckpointDto
+	45, // 5: TourDto.publish_time:type_name -> google.protobuf.Timestamp
+	45, // 6: TourDto.archive_time:type_name -> google.protobuf.Timestamp
+	24, // 7: TourDto.equipments:type_name -> EquipmentDto
+	25, // 8: TourDto.travel_time_and_method:type_name -> TravelTimeAndMethodDto
 	2,  // 9: TravelTimeAndMethodDto.travel_method:type_name -> TravelMethod
-	21, // 10: FindByAuthorIdResponse.tours:type_name -> TourDto
-	22, // 11: FindByTourIdResponse.checkpoints:type_name -> CheckpointDto
-	3,  // 12: GreeterService.Greet:input_type -> Request
-	3,  // 13: GreeterService.GreetTest:input_type -> Request
-	6,  // 14: FollowerService.WriteUserRpc:input_type -> WriteUserRequest
-	10, // 15: FollowerService.FindByIdRpc:input_type -> FindByIdRequest
-	11, // 16: FollowerService.CreateFollowConnectionRpc:input_type -> CreateFollowConnectionRequest
-	12, // 17: FollowerService.GetFollowsRpc:input_type -> GetFollowsRequest
-	13, // 18: FollowerService.GetFollowersRpc:input_type -> GetFollowersRequest
-	14, // 19: FollowerService.GetSuggestionsForUserRpc:input_type -> GetSuggestionsRequest
-	15, // 20: FollowerService.CheckIfFollowingConnectionExistRpc:input_type -> CheckIfFollowingConnectionExistRequest
-	20, // 21: FollowerService.DeleteFollowConnectionRpc:input_type -> DeleteFollowConnectionRequest
-	25, // 22: TourService.FindTour:input_type -> FindTourRequest
-	26, // 23: TourService.FindTourByAuthorId:input_type -> FindByAuthorIdRequest
-	21, // 24: TourService.CreateTour:input_type -> TourDto
-	21, // 25: TourService.UpdateTour:input_type -> TourDto
-	28, // 26: TourService.PublishTour:input_type -> PublishTourRequest
-	30, // 27: TourService.ArchiveTour:input_type -> ArchiveTourRequest
-	32, // 28: CheckpointService.FindCheckpoint:input_type -> FindCheckpointRequest
-	33, // 29: CheckpointService.FindCheckpointByTourId:input_type -> FindByTourIdRequest
-	22, // 30: CheckpointService.CreateCheckpoint:input_type -> CheckpointDto
-	35, // 31: CheckpointService.DeleteCheckpoint:input_type -> DeleteRequest
-	4,  // 32: GreeterService.Greet:output_type -> Response
-	4,  // 33: GreeterService.GreetTest:output_type -> Response
-	9,  // 34: FollowerService.WriteUserRpc:output_type -> Empty
-	7,  // 35: FollowerService.FindByIdRpc:output_type -> FindByIdResponse
-	9,  // 36: FollowerService.CreateFollowConnectionRpc:output_type -> Empty
-	16, // 37: FollowerService.GetFollowsRpc:output_type -> FollowsResponse
-	17, // 38: FollowerService.GetFollowersRpc:output_type -> FollowersResponse
-	18, // 39: FollowerService.GetSuggestionsForUserRpc:output_type -> SuggestionsResponse
-	19, // 40: FollowerService.CheckIfFollowingConnectionExistRpc:output_type -> CheckResponse
-	9,  // 41: FollowerService.DeleteFollowConnectionRpc:output_type -> Empty
-	21, // 42: TourService.FindTour:output_type -> TourDto
-	27, // 43: TourService.FindTourByAuthorId:output_type -> FindByAuthorIdResponse
-	21, // 44: TourService.CreateTour:output_type -> TourDto
-	21, // 45: TourService.UpdateTour:output_type -> TourDto
-	29, // 46: TourService.PublishTour:output_type -> PublishTourResponse
-	31, // 47: TourService.ArchiveTour:output_type -> ArchiveTourResponse
-	22, // 48: CheckpointService.FindCheckpoint:output_type -> CheckpointDto
-	34, // 49: CheckpointService.FindCheckpointByTourId:output_type -> FindByTourIdResponse
-	22, // 50: CheckpointService.CreateCheckpoint:output_type -> CheckpointDto
-	36, // 51: CheckpointService.DeleteCheckpoint:output_type -> DeleteResponse
-	32, // [32:52] is the sub-list for method output_type
-	12, // [12:32] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	22, // 10: FindByAuthorIdResponse.tours:type_name -> TourDto
+	23, // 11: FindByTourIdResponse.checkpoints:type_name -> CheckpointDto
+	3,  // 12: AccountRegistration.Role:type_name -> UserRole
+	3,  // 13: UserDto.Role:type_name -> UserRole
+	4,  // 14: GreeterService.Greet:input_type -> Request
+	4,  // 15: GreeterService.GreetTest:input_type -> Request
+	7,  // 16: FollowerService.WriteUserRpc:input_type -> WriteUserRequest
+	11, // 17: FollowerService.FindByIdRpc:input_type -> FindByIdRequest
+	12, // 18: FollowerService.CreateFollowConnectionRpc:input_type -> CreateFollowConnectionRequest
+	13, // 19: FollowerService.GetFollowsRpc:input_type -> GetFollowsRequest
+	14, // 20: FollowerService.GetFollowersRpc:input_type -> GetFollowersRequest
+	15, // 21: FollowerService.GetSuggestionsForUserRpc:input_type -> GetSuggestionsRequest
+	16, // 22: FollowerService.CheckIfFollowingConnectionExistRpc:input_type -> CheckIfFollowingConnectionExistRequest
+	21, // 23: FollowerService.DeleteFollowConnectionRpc:input_type -> DeleteFollowConnectionRequest
+	26, // 24: TourService.FindTour:input_type -> FindTourRequest
+	27, // 25: TourService.FindTourByAuthorId:input_type -> FindByAuthorIdRequest
+	22, // 26: TourService.CreateTour:input_type -> TourDto
+	22, // 27: TourService.UpdateTour:input_type -> TourDto
+	29, // 28: TourService.PublishTour:input_type -> PublishTourRequest
+	31, // 29: TourService.ArchiveTour:input_type -> ArchiveTourRequest
+	33, // 30: CheckpointService.FindCheckpoint:input_type -> FindCheckpointRequest
+	34, // 31: CheckpointService.FindCheckpointByTourId:input_type -> FindByTourIdRequest
+	23, // 32: CheckpointService.CreateCheckpoint:input_type -> CheckpointDto
+	36, // 33: CheckpointService.DeleteCheckpoint:input_type -> DeleteRequest
+	38, // 34: Authorize.Authorize:input_type -> Credentials
+	40, // 35: Authorize.Register:input_type -> AccountRegistration
+	41, // 36: UserService.GetById:input_type -> UserIdRequest
+	43, // 37: PersonService.GetByUserId:input_type -> PersonIdRequest
+	5,  // 38: GreeterService.Greet:output_type -> Response
+	5,  // 39: GreeterService.GreetTest:output_type -> Response
+	10, // 40: FollowerService.WriteUserRpc:output_type -> Empty
+	8,  // 41: FollowerService.FindByIdRpc:output_type -> FindByIdResponse
+	10, // 42: FollowerService.CreateFollowConnectionRpc:output_type -> Empty
+	17, // 43: FollowerService.GetFollowsRpc:output_type -> FollowsResponse
+	18, // 44: FollowerService.GetFollowersRpc:output_type -> FollowersResponse
+	19, // 45: FollowerService.GetSuggestionsForUserRpc:output_type -> SuggestionsResponse
+	20, // 46: FollowerService.CheckIfFollowingConnectionExistRpc:output_type -> CheckResponse
+	10, // 47: FollowerService.DeleteFollowConnectionRpc:output_type -> Empty
+	22, // 48: TourService.FindTour:output_type -> TourDto
+	28, // 49: TourService.FindTourByAuthorId:output_type -> FindByAuthorIdResponse
+	22, // 50: TourService.CreateTour:output_type -> TourDto
+	22, // 51: TourService.UpdateTour:output_type -> TourDto
+	30, // 52: TourService.PublishTour:output_type -> PublishTourResponse
+	32, // 53: TourService.ArchiveTour:output_type -> ArchiveTourResponse
+	23, // 54: CheckpointService.FindCheckpoint:output_type -> CheckpointDto
+	35, // 55: CheckpointService.FindCheckpointByTourId:output_type -> FindByTourIdResponse
+	23, // 56: CheckpointService.CreateCheckpoint:output_type -> CheckpointDto
+	37, // 57: CheckpointService.DeleteCheckpoint:output_type -> DeleteResponse
+	39, // 58: Authorize.Authorize:output_type -> AuthenticationTokens
+	39, // 59: Authorize.Register:output_type -> AuthenticationTokens
+	42, // 60: UserService.GetById:output_type -> UserDto
+	44, // 61: PersonService.GetByUserId:output_type -> PersonDto
+	38, // [38:62] is the sub-list for method output_type
+	14, // [14:38] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_greeter_greeter_service_proto_init() }
@@ -2760,16 +3382,100 @@ func file_greeter_greeter_service_proto_init() {
 				return nil
 			}
 		}
+		file_greeter_greeter_service_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Credentials); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AuthenticationTokens); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AccountRegistration); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserIdRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserDto); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PersonIdRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_greeter_greeter_service_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PersonDto); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_greeter_greeter_service_proto_rawDesc,
-			NumEnums:      3,
-			NumMessages:   34,
+			NumEnums:      4,
+			NumMessages:   41,
 			NumExtensions: 0,
-			NumServices:   4,
+			NumServices:   7,
 		},
 		GoTypes:           file_greeter_greeter_service_proto_goTypes,
 		DependencyIndexes: file_greeter_greeter_service_proto_depIdxs,

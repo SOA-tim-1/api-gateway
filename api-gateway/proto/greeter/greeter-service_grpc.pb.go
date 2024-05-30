@@ -969,3 +969,310 @@ var CheckpointService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "greeter/greeter-service.proto",
 }
+
+const (
+	Authorize_Authorize_FullMethodName = "/Authorize/Authorize"
+	Authorize_Register_FullMethodName  = "/Authorize/Register"
+)
+
+// AuthorizeClient is the client API for Authorize service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AuthorizeClient interface {
+	Authorize(ctx context.Context, in *Credentials, opts ...grpc.CallOption) (*AuthenticationTokens, error)
+	Register(ctx context.Context, in *AccountRegistration, opts ...grpc.CallOption) (*AuthenticationTokens, error)
+}
+
+type authorizeClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAuthorizeClient(cc grpc.ClientConnInterface) AuthorizeClient {
+	return &authorizeClient{cc}
+}
+
+func (c *authorizeClient) Authorize(ctx context.Context, in *Credentials, opts ...grpc.CallOption) (*AuthenticationTokens, error) {
+	out := new(AuthenticationTokens)
+	err := c.cc.Invoke(ctx, Authorize_Authorize_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authorizeClient) Register(ctx context.Context, in *AccountRegistration, opts ...grpc.CallOption) (*AuthenticationTokens, error) {
+	out := new(AuthenticationTokens)
+	err := c.cc.Invoke(ctx, Authorize_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AuthorizeServer is the server API for Authorize service.
+// All implementations must embed UnimplementedAuthorizeServer
+// for forward compatibility
+type AuthorizeServer interface {
+	Authorize(context.Context, *Credentials) (*AuthenticationTokens, error)
+	Register(context.Context, *AccountRegistration) (*AuthenticationTokens, error)
+	mustEmbedUnimplementedAuthorizeServer()
+}
+
+// UnimplementedAuthorizeServer must be embedded to have forward compatible implementations.
+type UnimplementedAuthorizeServer struct {
+}
+
+func (UnimplementedAuthorizeServer) Authorize(context.Context, *Credentials) (*AuthenticationTokens, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
+}
+func (UnimplementedAuthorizeServer) Register(context.Context, *AccountRegistration) (*AuthenticationTokens, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedAuthorizeServer) mustEmbedUnimplementedAuthorizeServer() {}
+
+// UnsafeAuthorizeServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AuthorizeServer will
+// result in compilation errors.
+type UnsafeAuthorizeServer interface {
+	mustEmbedUnimplementedAuthorizeServer()
+}
+
+func RegisterAuthorizeServer(s grpc.ServiceRegistrar, srv AuthorizeServer) {
+	s.RegisterService(&Authorize_ServiceDesc, srv)
+}
+
+func _Authorize_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Credentials)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizeServer).Authorize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Authorize_Authorize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizeServer).Authorize(ctx, req.(*Credentials))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Authorize_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccountRegistration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizeServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Authorize_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizeServer).Register(ctx, req.(*AccountRegistration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Authorize_ServiceDesc is the grpc.ServiceDesc for Authorize service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Authorize_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "Authorize",
+	HandlerType: (*AuthorizeServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Authorize",
+			Handler:    _Authorize_Authorize_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _Authorize_Register_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	UserService_GetById_FullMethodName = "/UserService/GetById"
+)
+
+// UserServiceClient is the client API for UserService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UserServiceClient interface {
+	GetById(ctx context.Context, in *UserIdRequest, opts ...grpc.CallOption) (*UserDto, error)
+}
+
+type userServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
+	return &userServiceClient{cc}
+}
+
+func (c *userServiceClient) GetById(ctx context.Context, in *UserIdRequest, opts ...grpc.CallOption) (*UserDto, error) {
+	out := new(UserDto)
+	err := c.cc.Invoke(ctx, UserService_GetById_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserServiceServer is the server API for UserService service.
+// All implementations must embed UnimplementedUserServiceServer
+// for forward compatibility
+type UserServiceServer interface {
+	GetById(context.Context, *UserIdRequest) (*UserDto, error)
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedUserServiceServer struct {
+}
+
+func (UnimplementedUserServiceServer) GetById(context.Context, *UserIdRequest) (*UserDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetById not implemented")
+}
+func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
+
+// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserServiceServer will
+// result in compilation errors.
+type UnsafeUserServiceServer interface {
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+	s.RegisterService(&UserService_ServiceDesc, srv)
+}
+
+func _UserService_GetById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetById(ctx, req.(*UserIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "UserService",
+	HandlerType: (*UserServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetById",
+			Handler:    _UserService_GetById_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	PersonService_GetByUserId_FullMethodName = "/PersonService/GetByUserId"
+)
+
+// PersonServiceClient is the client API for PersonService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PersonServiceClient interface {
+	GetByUserId(ctx context.Context, in *PersonIdRequest, opts ...grpc.CallOption) (*PersonDto, error)
+}
+
+type personServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPersonServiceClient(cc grpc.ClientConnInterface) PersonServiceClient {
+	return &personServiceClient{cc}
+}
+
+func (c *personServiceClient) GetByUserId(ctx context.Context, in *PersonIdRequest, opts ...grpc.CallOption) (*PersonDto, error) {
+	out := new(PersonDto)
+	err := c.cc.Invoke(ctx, PersonService_GetByUserId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PersonServiceServer is the server API for PersonService service.
+// All implementations must embed UnimplementedPersonServiceServer
+// for forward compatibility
+type PersonServiceServer interface {
+	GetByUserId(context.Context, *PersonIdRequest) (*PersonDto, error)
+	mustEmbedUnimplementedPersonServiceServer()
+}
+
+// UnimplementedPersonServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPersonServiceServer struct {
+}
+
+func (UnimplementedPersonServiceServer) GetByUserId(context.Context, *PersonIdRequest) (*PersonDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByUserId not implemented")
+}
+func (UnimplementedPersonServiceServer) mustEmbedUnimplementedPersonServiceServer() {}
+
+// UnsafePersonServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PersonServiceServer will
+// result in compilation errors.
+type UnsafePersonServiceServer interface {
+	mustEmbedUnimplementedPersonServiceServer()
+}
+
+func RegisterPersonServiceServer(s grpc.ServiceRegistrar, srv PersonServiceServer) {
+	s.RegisterService(&PersonService_ServiceDesc, srv)
+}
+
+func _PersonService_GetByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PersonIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PersonServiceServer).GetByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PersonService_GetByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PersonServiceServer).GetByUserId(ctx, req.(*PersonIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PersonService_ServiceDesc is the grpc.ServiceDesc for PersonService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PersonService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "PersonService",
+	HandlerType: (*PersonServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetByUserId",
+			Handler:    _PersonService_GetByUserId_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
