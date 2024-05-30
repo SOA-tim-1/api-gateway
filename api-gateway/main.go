@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"example/gateway/config"
 	"example/gateway/proto/greeter"
 	"log"
@@ -13,6 +14,7 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
@@ -129,12 +131,17 @@ func main() {
 		log.Fatalln("Failed to dial server:", err)
 	}
 
+	config := &tls.Config{
+		InsecureSkipVerify: true,
+	}
+	creds := credentials.NewTLS(config)
+
 	logger.Println("Creating gRPC connection to the Stakeholders service...")
 	conn5, err := grpc.DialContext(
 		context.Background(),
 		":44332",
 		grpc.WithBlock(),
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithTransportCredentials(creds),
 	)
 
 	if err != nil {

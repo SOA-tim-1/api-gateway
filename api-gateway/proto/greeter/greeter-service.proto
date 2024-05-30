@@ -297,7 +297,7 @@ message DeleteFollowConnectionRequest {
     rpc Authorize (Credentials) returns (AuthenticationTokens) {
       option (google.api.http) = {
         post: "/api/users/login"
-        body: "*"
+        body: "credentials"
       };
     }
     rpc Register (AccountRegistration) returns (AuthenticationTokens) {
