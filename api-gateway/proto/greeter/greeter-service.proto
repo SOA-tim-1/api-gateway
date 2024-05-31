@@ -383,7 +383,7 @@ message DeleteFollowConnectionRequest {
             get: "/api/blogs"
         };
     }
-    rpc GetBlogById(GetBlogByIdRequest) returns (GetBlogByIdResponse) {
+    rpc GetBlogById(GetBlogByIdRequest) returns (Blog) {
         option (google.api.http) = {
             get: "/api/blogs/{id}"
         };
@@ -445,10 +445,6 @@ message GetBlogByIdRequest {
 // Response messages
 message GetAllBlogsResponse {
   repeated Blog blogs = 1;
-}
-
-message GetBlogByIdResponse {
-  Blog blog = 1;
 }
 
 service EquipmentService {
