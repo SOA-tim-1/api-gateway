@@ -531,9 +531,6 @@ message EncounterDto {
 
 // Definicija servisa EncounterService
 service EncounterService {
-  rpc Get(GetEncounterRequest) returns (EncounterDto) {
-    
-  }
   rpc GetAll(Empty) returns (EncounterDtoList) {
     option (google.api.http) = {
       get: "/api/encounter"
