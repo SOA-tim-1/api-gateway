@@ -450,3 +450,51 @@ message GetAllBlogsResponse {
 message GetBlogByIdResponse {
   Blog blog = 1;
 }
+
+service EquipmentService {
+  rpc FindAllEquipments(FindAllRequest) returns (FindAllResponse) {
+    option (google.api.http) = {
+      get: "/api/author/equipment"
+  };
+  }
+}
+
+message FindAllRequest {}
+
+message FindAllResponse {
+  repeated EquipmentDto equipments = 1;
+}
+
+message Coupon {
+  int64 id = 1;
+  string coupon_hash = 2;
+  float discount_percentage = 3;
+  google.protobuf.Timestamp discount_expiration = 4;
+  int32 applicable_tour_id = 5;
+  int32 coupon_issuer_id = 6;
+  bool is_applicable_to_all_user_tours = 7;
+  bool is_valid = 8;
+}
+
+service CouponService {
+  rpc CreateCoupon(Coupon) returns (CreateCouponResponse) {
+    option (google.api.http) = {
+      post: "/api/coupon/add-coupon"
+      body: "*"
+  };
+  }
+  rpc RemoveCoupon(RemoveCouponRequest) returns (RemoveCouponResponse) {
+    option (google.api.http) = {
+      delete: "/api/coupon/delete-coupon/{user_id}/{hash}"
+    };
+  }
+}
+
+message CreateCouponResponse {}
+
+message RemoveCouponRequest {
+  string hash = 1;
+  int32 user_id = 2;
+}
+
+message RemoveCouponResponse {}

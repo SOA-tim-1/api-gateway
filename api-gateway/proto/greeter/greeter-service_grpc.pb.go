@@ -1276,3 +1276,347 @@ var PersonService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "greeter/greeter-service.proto",
 }
+
+const (
+	BlogService_GetAllBlogs_FullMethodName = "/BlogService/GetAllBlogs"
+	BlogService_GetBlogById_FullMethodName = "/BlogService/GetBlogById"
+)
+
+// BlogServiceClient is the client API for BlogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BlogServiceClient interface {
+	GetAllBlogs(ctx context.Context, in *GetAllBlogsRequest, opts ...grpc.CallOption) (*GetAllBlogsResponse, error)
+	GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*GetBlogByIdResponse, error)
+}
+
+type blogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBlogServiceClient(cc grpc.ClientConnInterface) BlogServiceClient {
+	return &blogServiceClient{cc}
+}
+
+func (c *blogServiceClient) GetAllBlogs(ctx context.Context, in *GetAllBlogsRequest, opts ...grpc.CallOption) (*GetAllBlogsResponse, error) {
+	out := new(GetAllBlogsResponse)
+	err := c.cc.Invoke(ctx, BlogService_GetAllBlogs_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *blogServiceClient) GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*GetBlogByIdResponse, error) {
+	out := new(GetBlogByIdResponse)
+	err := c.cc.Invoke(ctx, BlogService_GetBlogById_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BlogServiceServer is the server API for BlogService service.
+// All implementations must embed UnimplementedBlogServiceServer
+// for forward compatibility
+type BlogServiceServer interface {
+	GetAllBlogs(context.Context, *GetAllBlogsRequest) (*GetAllBlogsResponse, error)
+	GetBlogById(context.Context, *GetBlogByIdRequest) (*GetBlogByIdResponse, error)
+	mustEmbedUnimplementedBlogServiceServer()
+}
+
+// UnimplementedBlogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedBlogServiceServer struct {
+}
+
+func (UnimplementedBlogServiceServer) GetAllBlogs(context.Context, *GetAllBlogsRequest) (*GetAllBlogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllBlogs not implemented")
+}
+func (UnimplementedBlogServiceServer) GetBlogById(context.Context, *GetBlogByIdRequest) (*GetBlogByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBlogById not implemented")
+}
+func (UnimplementedBlogServiceServer) mustEmbedUnimplementedBlogServiceServer() {}
+
+// UnsafeBlogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BlogServiceServer will
+// result in compilation errors.
+type UnsafeBlogServiceServer interface {
+	mustEmbedUnimplementedBlogServiceServer()
+}
+
+func RegisterBlogServiceServer(s grpc.ServiceRegistrar, srv BlogServiceServer) {
+	s.RegisterService(&BlogService_ServiceDesc, srv)
+}
+
+func _BlogService_GetAllBlogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllBlogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BlogServiceServer).GetAllBlogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BlogService_GetAllBlogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BlogServiceServer).GetAllBlogs(ctx, req.(*GetAllBlogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BlogService_GetBlogById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBlogByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BlogServiceServer).GetBlogById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BlogService_GetBlogById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BlogServiceServer).GetBlogById(ctx, req.(*GetBlogByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BlogService_ServiceDesc is the grpc.ServiceDesc for BlogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BlogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "BlogService",
+	HandlerType: (*BlogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAllBlogs",
+			Handler:    _BlogService_GetAllBlogs_Handler,
+		},
+		{
+			MethodName: "GetBlogById",
+			Handler:    _BlogService_GetBlogById_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	EquipmentService_FindAllEquipments_FullMethodName = "/EquipmentService/FindAllEquipments"
+)
+
+// EquipmentServiceClient is the client API for EquipmentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EquipmentServiceClient interface {
+	FindAllEquipments(ctx context.Context, in *FindAllRequest, opts ...grpc.CallOption) (*FindAllResponse, error)
+}
+
+type equipmentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEquipmentServiceClient(cc grpc.ClientConnInterface) EquipmentServiceClient {
+	return &equipmentServiceClient{cc}
+}
+
+func (c *equipmentServiceClient) FindAllEquipments(ctx context.Context, in *FindAllRequest, opts ...grpc.CallOption) (*FindAllResponse, error) {
+	out := new(FindAllResponse)
+	err := c.cc.Invoke(ctx, EquipmentService_FindAllEquipments_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EquipmentServiceServer is the server API for EquipmentService service.
+// All implementations must embed UnimplementedEquipmentServiceServer
+// for forward compatibility
+type EquipmentServiceServer interface {
+	FindAllEquipments(context.Context, *FindAllRequest) (*FindAllResponse, error)
+	mustEmbedUnimplementedEquipmentServiceServer()
+}
+
+// UnimplementedEquipmentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedEquipmentServiceServer struct {
+}
+
+func (UnimplementedEquipmentServiceServer) FindAllEquipments(context.Context, *FindAllRequest) (*FindAllResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindAllEquipments not implemented")
+}
+func (UnimplementedEquipmentServiceServer) mustEmbedUnimplementedEquipmentServiceServer() {}
+
+// UnsafeEquipmentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EquipmentServiceServer will
+// result in compilation errors.
+type UnsafeEquipmentServiceServer interface {
+	mustEmbedUnimplementedEquipmentServiceServer()
+}
+
+func RegisterEquipmentServiceServer(s grpc.ServiceRegistrar, srv EquipmentServiceServer) {
+	s.RegisterService(&EquipmentService_ServiceDesc, srv)
+}
+
+func _EquipmentService_FindAllEquipments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EquipmentServiceServer).FindAllEquipments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EquipmentService_FindAllEquipments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EquipmentServiceServer).FindAllEquipments(ctx, req.(*FindAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// EquipmentService_ServiceDesc is the grpc.ServiceDesc for EquipmentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var EquipmentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "EquipmentService",
+	HandlerType: (*EquipmentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "FindAllEquipments",
+			Handler:    _EquipmentService_FindAllEquipments_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
+
+const (
+	CouponService_CreateCoupon_FullMethodName = "/CouponService/CreateCoupon"
+	CouponService_RemoveCoupon_FullMethodName = "/CouponService/RemoveCoupon"
+)
+
+// CouponServiceClient is the client API for CouponService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CouponServiceClient interface {
+	CreateCoupon(ctx context.Context, in *Coupon, opts ...grpc.CallOption) (*CreateCouponResponse, error)
+	RemoveCoupon(ctx context.Context, in *RemoveCouponRequest, opts ...grpc.CallOption) (*RemoveCouponResponse, error)
+}
+
+type couponServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCouponServiceClient(cc grpc.ClientConnInterface) CouponServiceClient {
+	return &couponServiceClient{cc}
+}
+
+func (c *couponServiceClient) CreateCoupon(ctx context.Context, in *Coupon, opts ...grpc.CallOption) (*CreateCouponResponse, error) {
+	out := new(CreateCouponResponse)
+	err := c.cc.Invoke(ctx, CouponService_CreateCoupon_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponServiceClient) RemoveCoupon(ctx context.Context, in *RemoveCouponRequest, opts ...grpc.CallOption) (*RemoveCouponResponse, error) {
+	out := new(RemoveCouponResponse)
+	err := c.cc.Invoke(ctx, CouponService_RemoveCoupon_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CouponServiceServer is the server API for CouponService service.
+// All implementations must embed UnimplementedCouponServiceServer
+// for forward compatibility
+type CouponServiceServer interface {
+	CreateCoupon(context.Context, *Coupon) (*CreateCouponResponse, error)
+	RemoveCoupon(context.Context, *RemoveCouponRequest) (*RemoveCouponResponse, error)
+	mustEmbedUnimplementedCouponServiceServer()
+}
+
+// UnimplementedCouponServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCouponServiceServer struct {
+}
+
+func (UnimplementedCouponServiceServer) CreateCoupon(context.Context, *Coupon) (*CreateCouponResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCoupon not implemented")
+}
+func (UnimplementedCouponServiceServer) RemoveCoupon(context.Context, *RemoveCouponRequest) (*RemoveCouponResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveCoupon not implemented")
+}
+func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
+
+// UnsafeCouponServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CouponServiceServer will
+// result in compilation errors.
+type UnsafeCouponServiceServer interface {
+	mustEmbedUnimplementedCouponServiceServer()
+}
+
+func RegisterCouponServiceServer(s grpc.ServiceRegistrar, srv CouponServiceServer) {
+	s.RegisterService(&CouponService_ServiceDesc, srv)
+}
+
+func _CouponService_CreateCoupon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Coupon)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).CreateCoupon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CouponService_CreateCoupon_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).CreateCoupon(ctx, req.(*Coupon))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CouponService_RemoveCoupon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveCouponRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).RemoveCoupon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CouponService_RemoveCoupon_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).RemoveCoupon(ctx, req.(*RemoveCouponRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CouponService_ServiceDesc is the grpc.ServiceDesc for CouponService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CouponService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "CouponService",
+	HandlerType: (*CouponServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateCoupon",
+			Handler:    _CouponService_CreateCoupon_Handler,
+		},
+		{
+			MethodName: "RemoveCoupon",
+			Handler:    _CouponService_RemoveCoupon_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}
