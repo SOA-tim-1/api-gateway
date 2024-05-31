@@ -148,6 +148,18 @@ func main() {
 		log.Fatalln("Failed to dial server:", err)
 	}
 
+	logger.Println("Creating gRPC connection to the Blog service...")
+	conn6, err := grpc.DialContext(
+		context.Background(),
+		":44333",
+		grpc.WithBlock(),
+		grpc.WithTransportCredentials(creds),
+	)
+
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
+	}
+
 	logger.Println("Creating ServeMux for gRPC Gateway...")
 	gwmux := runtime.NewServeMux()
 
@@ -251,6 +263,17 @@ func main() {
 	)
 	if err != nil {
 		log.Fatalln("Failed to register Person Service gateway:", err)
+	}
+
+	client11 := greeter.NewBlogServiceClient(conn6)
+	logger.Println("Registering blog service handler...")
+	err = greeter.RegisterBlogServiceHandlerClient(
+		context.Background(),
+		gwmux,
+		client11,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register Blog Service gateway:", err)
 	}
 
 	//handler := authMiddleware(gwmux)
