@@ -1287,7 +1287,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BlogServiceClient interface {
 	GetAllBlogs(ctx context.Context, in *GetAllBlogsRequest, opts ...grpc.CallOption) (*GetAllBlogsResponse, error)
-	GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*GetBlogByIdResponse, error)
+	GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*Blog, error)
 }
 
 type blogServiceClient struct {
@@ -1307,8 +1307,8 @@ func (c *blogServiceClient) GetAllBlogs(ctx context.Context, in *GetAllBlogsRequ
 	return out, nil
 }
 
-func (c *blogServiceClient) GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*GetBlogByIdResponse, error) {
-	out := new(GetBlogByIdResponse)
+func (c *blogServiceClient) GetBlogById(ctx context.Context, in *GetBlogByIdRequest, opts ...grpc.CallOption) (*Blog, error) {
+	out := new(Blog)
 	err := c.cc.Invoke(ctx, BlogService_GetBlogById_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1321,7 +1321,7 @@ func (c *blogServiceClient) GetBlogById(ctx context.Context, in *GetBlogByIdRequ
 // for forward compatibility
 type BlogServiceServer interface {
 	GetAllBlogs(context.Context, *GetAllBlogsRequest) (*GetAllBlogsResponse, error)
-	GetBlogById(context.Context, *GetBlogByIdRequest) (*GetBlogByIdResponse, error)
+	GetBlogById(context.Context, *GetBlogByIdRequest) (*Blog, error)
 	mustEmbedUnimplementedBlogServiceServer()
 }
 
@@ -1332,7 +1332,7 @@ type UnimplementedBlogServiceServer struct {
 func (UnimplementedBlogServiceServer) GetAllBlogs(context.Context, *GetAllBlogsRequest) (*GetAllBlogsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllBlogs not implemented")
 }
-func (UnimplementedBlogServiceServer) GetBlogById(context.Context, *GetBlogByIdRequest) (*GetBlogByIdResponse, error) {
+func (UnimplementedBlogServiceServer) GetBlogById(context.Context, *GetBlogByIdRequest) (*Blog, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBlogById not implemented")
 }
 func (UnimplementedBlogServiceServer) mustEmbedUnimplementedBlogServiceServer() {}
