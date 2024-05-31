@@ -209,6 +209,28 @@ func main() {
 		log.Fatalln("Failed to register Authorize Service gateway:", err)
 	}
 
+	client7 := greeter.NewUserServiceClient(conn5)
+	logger.Println("Registering User service handler...")
+	err = greeter.RegisterUserServiceHandlerClient(
+		context.Background(),
+		gwmux,
+		client7,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register User Service gateway:", err)
+	}
+
+	client8 := greeter.NewPersonServiceClient(conn5)
+	logger.Println("Registering Person service handler...")
+	err = greeter.RegisterPersonServiceHandlerClient(
+		context.Background(),
+		gwmux,
+		client8,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register Person Service gateway:", err)
+	}
+
 	//handler := authMiddleware(gwmux)
 
 	logger.Println("Adding CORS middleware...")
