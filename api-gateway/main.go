@@ -160,6 +160,19 @@ func main() {
 		log.Fatalln("Failed to dial server:", err)
 	}
 
+	logger.Println("Creating gRPC connection to the Encounter service...")
+	conn7, err := grpc.DialContext(
+		context.Background(),
+		// cfg.TourServiceAddress,
+		":8091",
+		grpc.WithBlock(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
+	}
+
 	logger.Println("Creating ServeMux for gRPC Gateway...")
 	gwmux := runtime.NewServeMux()
 
@@ -184,7 +197,7 @@ func main() {
 		client2,
 	)
 	if err != nil {
-		log.Fatalln("Failed to register AnotherService gateway:", err)
+		log.Fatalln("Failed to register Follower gateway:", err)
 	}
 
 	client4 := greeter.NewTourServiceClient(conn4)
@@ -196,7 +209,7 @@ func main() {
 		client4,
 	)
 	if err != nil {
-		log.Fatalln("Failed to register AnotherService gateway:", err)
+		log.Fatalln("Failed to register Tour gateway:", err)
 	}
 
 	client5 := greeter.NewCheckpointServiceClient(conn4)
@@ -207,7 +220,7 @@ func main() {
 		client5,
 	)
 	if err != nil {
-		log.Fatalln("Failed to register AnotherService gateway:", err)
+		log.Fatalln("Failed to register Checkpoint gateway:", err)
 	}
 
 	client6 := greeter.NewAuthorizeClient(conn5)
@@ -251,7 +264,7 @@ func main() {
 		client9,
 	)
 	if err != nil {
-		log.Fatalln("Failed to register Person Service gateway:", err)
+		log.Fatalln("Failed to register Equipment Service gateway:", err)
 	}
 
 	client10 := greeter.NewCouponServiceClient(conn4)
@@ -262,7 +275,7 @@ func main() {
 		client10,
 	)
 	if err != nil {
-		log.Fatalln("Failed to register Person Service gateway:", err)
+		log.Fatalln("Failed to register Coupon Service gateway:", err)
 	}
 
 	client11 := greeter.NewBlogServiceClient(conn6)
@@ -274,6 +287,17 @@ func main() {
 	)
 	if err != nil {
 		log.Fatalln("Failed to register Blog Service gateway:", err)
+	}
+
+	client12 := greeter.NewEncounterServiceClient(conn7)
+	logger.Println("Registering Encounter service handler...")
+	err = greeter.RegisterEncounterServiceHandlerClient(
+		context.Background(),
+		gwmux,
+		client12,
+	)
+	if err != nil {
+		log.Fatalln("Failed to register Encounter Service gateway:", err)
 	}
 
 	//handler := authMiddleware(gwmux)

@@ -1620,3 +1620,278 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "greeter/greeter-service.proto",
 }
+
+const (
+	EncounterService_Get_FullMethodName          = "/EncounterService/Get"
+	EncounterService_GetAll_FullMethodName       = "/EncounterService/GetAll"
+	EncounterService_Create_FullMethodName       = "/EncounterService/Create"
+	EncounterService_Update_FullMethodName       = "/EncounterService/Update"
+	EncounterService_Delete_FullMethodName       = "/EncounterService/Delete"
+	EncounterService_GetAllActive_FullMethodName = "/EncounterService/GetAllActive"
+)
+
+// EncounterServiceClient is the client API for EncounterService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EncounterServiceClient interface {
+	Get(ctx context.Context, in *GetEncounterRequest, opts ...grpc.CallOption) (*EncounterDto, error)
+	GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EncounterDtoList, error)
+	Create(ctx context.Context, in *EncounterDto, opts ...grpc.CallOption) (*EncounterDto, error)
+	Update(ctx context.Context, in *EncounterDto, opts ...grpc.CallOption) (*EncounterDto, error)
+	Delete(ctx context.Context, in *DeleteEncounterRequest, opts ...grpc.CallOption) (*Empty, error)
+	GetAllActive(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EncounterDtoList, error)
+}
+
+type encounterServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEncounterServiceClient(cc grpc.ClientConnInterface) EncounterServiceClient {
+	return &encounterServiceClient{cc}
+}
+
+func (c *encounterServiceClient) Get(ctx context.Context, in *GetEncounterRequest, opts ...grpc.CallOption) (*EncounterDto, error) {
+	out := new(EncounterDto)
+	err := c.cc.Invoke(ctx, EncounterService_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *encounterServiceClient) GetAll(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EncounterDtoList, error) {
+	out := new(EncounterDtoList)
+	err := c.cc.Invoke(ctx, EncounterService_GetAll_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *encounterServiceClient) Create(ctx context.Context, in *EncounterDto, opts ...grpc.CallOption) (*EncounterDto, error) {
+	out := new(EncounterDto)
+	err := c.cc.Invoke(ctx, EncounterService_Create_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *encounterServiceClient) Update(ctx context.Context, in *EncounterDto, opts ...grpc.CallOption) (*EncounterDto, error) {
+	out := new(EncounterDto)
+	err := c.cc.Invoke(ctx, EncounterService_Update_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *encounterServiceClient) Delete(ctx context.Context, in *DeleteEncounterRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, EncounterService_Delete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *encounterServiceClient) GetAllActive(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*EncounterDtoList, error) {
+	out := new(EncounterDtoList)
+	err := c.cc.Invoke(ctx, EncounterService_GetAllActive_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EncounterServiceServer is the server API for EncounterService service.
+// All implementations must embed UnimplementedEncounterServiceServer
+// for forward compatibility
+type EncounterServiceServer interface {
+	Get(context.Context, *GetEncounterRequest) (*EncounterDto, error)
+	GetAll(context.Context, *Empty) (*EncounterDtoList, error)
+	Create(context.Context, *EncounterDto) (*EncounterDto, error)
+	Update(context.Context, *EncounterDto) (*EncounterDto, error)
+	Delete(context.Context, *DeleteEncounterRequest) (*Empty, error)
+	GetAllActive(context.Context, *Empty) (*EncounterDtoList, error)
+	mustEmbedUnimplementedEncounterServiceServer()
+}
+
+// UnimplementedEncounterServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedEncounterServiceServer struct {
+}
+
+func (UnimplementedEncounterServiceServer) Get(context.Context, *GetEncounterRequest) (*EncounterDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedEncounterServiceServer) GetAll(context.Context, *Empty) (*EncounterDtoList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
+}
+func (UnimplementedEncounterServiceServer) Create(context.Context, *EncounterDto) (*EncounterDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedEncounterServiceServer) Update(context.Context, *EncounterDto) (*EncounterDto, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedEncounterServiceServer) Delete(context.Context, *DeleteEncounterRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedEncounterServiceServer) GetAllActive(context.Context, *Empty) (*EncounterDtoList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllActive not implemented")
+}
+func (UnimplementedEncounterServiceServer) mustEmbedUnimplementedEncounterServiceServer() {}
+
+// UnsafeEncounterServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EncounterServiceServer will
+// result in compilation errors.
+type UnsafeEncounterServiceServer interface {
+	mustEmbedUnimplementedEncounterServiceServer()
+}
+
+func RegisterEncounterServiceServer(s grpc.ServiceRegistrar, srv EncounterServiceServer) {
+	s.RegisterService(&EncounterService_ServiceDesc, srv)
+}
+
+func _EncounterService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEncounterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).Get(ctx, req.(*GetEncounterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EncounterService_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).GetAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_GetAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).GetAll(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EncounterService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EncounterDto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).Create(ctx, req.(*EncounterDto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EncounterService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EncounterDto)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).Update(ctx, req.(*EncounterDto))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EncounterService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteEncounterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).Delete(ctx, req.(*DeleteEncounterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EncounterService_GetAllActive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EncounterServiceServer).GetAllActive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EncounterService_GetAllActive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EncounterServiceServer).GetAllActive(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// EncounterService_ServiceDesc is the grpc.ServiceDesc for EncounterService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var EncounterService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "EncounterService",
+	HandlerType: (*EncounterServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Get",
+			Handler:    _EncounterService_Get_Handler,
+		},
+		{
+			MethodName: "GetAll",
+			Handler:    _EncounterService_GetAll_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _EncounterService_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _EncounterService_Update_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _EncounterService_Delete_Handler,
+		},
+		{
+			MethodName: "GetAllActive",
+			Handler:    _EncounterService_GetAllActive_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter/greeter-service.proto",
+}

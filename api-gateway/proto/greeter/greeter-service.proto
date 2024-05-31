@@ -494,3 +494,86 @@ message RemoveCouponRequest {
 }
 
 message RemoveCouponResponse {}
+
+enum EncounterType {
+  SOCIAL = 0;
+  HIDDEN_LOCATION = 1;
+  MISC = 2;
+}
+
+enum EncounterStatus {
+  EXECUTION_ACTIVE = 0;
+  EXECUTION_DRAFT= 1;
+  EXECUTION_ARCHIVED = 2;
+}
+// Definicija DTO-a CoordinateDto
+message CoordinateDto {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+// Definicija DTO-a EncounterDto
+message EncounterDto {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  CoordinateDto coordinates = 4;
+  int32 xp = 5;
+  EncounterStatus status = 6;
+  EncounterType type = 7;
+  int32 range = 8;
+  string image_url = 9;
+  string misc_encounter_task = 10;
+  int32 social_encounter_required_people = 11;
+  int64 checkpoint_id = 12;
+  bool is_required = 13;
+}
+
+// Definicija servisa EncounterService
+service EncounterService {
+  rpc Get(GetEncounterRequest) returns (EncounterDto) {
+    
+  }
+  rpc GetAll(Empty) returns (EncounterDtoList) {
+    option (google.api.http) = {
+      get: "/api/encounter"
+    };
+  }
+  rpc Create(EncounterDto) returns (EncounterDto) {
+    option (google.api.http) = {
+      post: "/api/encounter"
+      body: "*"
+  };
+  }
+  rpc Update(EncounterDto) returns (EncounterDto) {
+    option (google.api.http) = {
+      put: "/api/encounter"
+      body: "*"
+  };
+  }
+  rpc Delete(DeleteEncounterRequest) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/api/encounter/{id}"
+  };
+  }
+  rpc GetAllActive(Empty) returns (EncounterDtoList) {
+    option (google.api.http) = {
+      get: "/api/encounter/active"
+    };
+  }
+}
+
+// Poruke zahteva i odgovora za svaku metodu
+
+message GetEncounterRequest {
+  string id = 1;
+}
+
+message DeleteEncounterRequest {
+  string id = 1;
+}
+
+// Poruka za listu EncounterDto objekata
+message EncounterDtoList {
+  repeated EncounterDto encounters = 1;
+}
