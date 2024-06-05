@@ -92,18 +92,18 @@ func main() {
 	cfg := config.GetConfig()
 	logger.Printf("Configuration loaded: %+v\n", cfg)
 
-	logger.Println("Creating gRPC connection to the Greeting service...")
-	conn, err := grpc.DialContext(
-		context.Background(),
-		// cfg.GreeterServiceAddress,
-		":8095",
-		grpc.WithBlock(),
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-	)
+	// logger.Println("Creating gRPC connection to the Greeting service...")
+	// conn, err := grpc.DialContext(
+	// 	context.Background(),
+	// 	// cfg.GreeterServiceAddress,
+	// 	":8095",
+	// 	grpc.WithBlock(),
+	// 	grpc.WithTransportCredentials(insecure.NewCredentials()),
+	// )
 
-	if err != nil {
-		log.Fatalln("Failed to dial server:", err)
-	}
+	// if err != nil {
+	// 	log.Fatalln("Failed to dial server:", err)
+	// }
 
 	logger.Println("Creating gRPC connection to the Follower service...")
 	conn2, err := grpc.DialContext(
@@ -176,17 +176,17 @@ func main() {
 	logger.Println("Creating ServeMux for gRPC Gateway...")
 	gwmux := runtime.NewServeMux()
 
-	client := greeter.NewGreeterServiceClient(conn)
+	// client := greeter.NewGreeterServiceClient(conn)
 
-	logger.Println("Registering Greeting service handler...")
-	err = greeter.RegisterGreeterServiceHandlerClient(
-		context.Background(),
-		gwmux,
-		client,
-	)
-	if err != nil {
-		log.Fatalln("Failed to register gateway:", err)
-	}
+	// logger.Println("Registering Greeting service handler...")
+	// err = greeter.RegisterGreeterServiceHandlerClient(
+	// 	context.Background(),
+	// 	gwmux,
+	// 	client,
+	// )
+	// if err != nil {
+	// 	log.Fatalln("Failed to register gateway:", err)
+	// }
 
 	client2 := greeter.NewFollowerServiceClient(conn2)
 
